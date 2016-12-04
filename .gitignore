@@ -14,3 +14,10 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
+.idea
+.idea/vcs.xml
+.idea/workspace.xml
+.gitignore
+.idea/tygershammer.iml
+.idea/copyright/profiles_settings.xml
+.idea/modules.xml
