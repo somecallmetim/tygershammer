@@ -1,0 +1,52 @@
+.main-text
+{
+    position: absolute;
+    top: 50px;
+    width: 96.66666666666666%;
+    color: #FFF;
+}
+.btn-min-block
+{
+    min-width: 170px;
+    line-height: 26px;
+}
+.btn-clear
+{
+    color: #FFF;
+    background-color: transparent;
+    border-color: #FFF;
+    margin-right: 15px;
+}
+.btn-clear:hover
+{
+    color: #000;
+    background-color: #FFF;
+}
+
+.page-header
+{
+    margin-top: 10px;
+}
+
+.page-header-text
+{
+    margin-top: 0;
+}
+
+.carousel-image
+{
+    height: 500px;
+    width: 1000px;
+}
+
+.navbar
+{
+    margin-bottom: 0;
+}
+
+
+/* added to help text pop when on top of images */
+.text-shadow {
+  color: white;
+  text-shadow: 1px 1px 2px black; 
+}
