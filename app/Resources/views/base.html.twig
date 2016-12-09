@@ -38,6 +38,12 @@
                             <li><a href="#">Compare Units</a></li>
                             <li><a href="#">Build New Army</a></li>
                             <li><a href="#">View Saved Army</a></li>
+                            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                <li><a href="#">Edit Units</a></li>
+                                <li><a href="#">Manage Users</a></li>
+                            {% elseif is_granted('ROLE_ADMIN') %}
+                                <li><a href="#">Edit Units</a></li>
+                            {% endif %}
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">

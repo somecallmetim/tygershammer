@@ -4,6 +4,11 @@ security:
 
     encoders:
         AppBundle\Entity\User: bcrypt
+
+    role_hierarchy:
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_USER]
+        ROLE_ADMIN: [ROLE_USER]
+        ROLE_USER:
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         our_users:

