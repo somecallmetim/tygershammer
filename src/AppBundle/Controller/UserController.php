@@ -27,15 +27,17 @@ class UserController extends Controller
 
         $form->handleRequest($request);
 
-        if($form->isValid()){
+        $em = $this->getDoctrine()->getManager();
+
+        if($form->isValid() && $form->isSubmitted()){
             /**@var User $user */
             $user = $form->getData();
 
+            //this is probably very bad practice :P
             if($user->getEmail() == 'timbauer@ymail.com'){
                 $user->setRoles(['ROLE_SUPER_ADMIN']);
             }
 
-            $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 
