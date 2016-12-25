@@ -7,11 +7,13 @@
             <div class="col-xs-12">
                 <h1>Add Unit</h1>
 
+
                 {{ form_start(form) }}
-                    {{ form_row(form.name) }}
+
+                    {{ include('units/_unitsForm.html.twig') }}
 
                     <button type="submit" class="btn btn-primary" formnovalidate>
-                        Add Unit
+                        Submit
                     </button>
                 {{ form_end(form) }}
             </div>

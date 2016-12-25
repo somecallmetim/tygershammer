@@ -9,16 +9,56 @@
 namespace AppBundle\Form;
 
 
+use AppBundle\Entity\FactionEntity;
+use AppBundle\Repository\FactionRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use AppBundle\Entity\AoSUnit;
 
 class AddUnitForm extends AbstractType
 {
+    private $choiceValues = [
+        'placeholder' => 'Please Select A Value',
+        'choices' => [
+            '0' => 0,
+            '1' => 1,
+            '2' => 2,
+            '3' => 3,
+            '4' => 4,
+            '5' => 5,
+            '6' => 6,
+            '7' => 7,
+            '8' => 8,
+            '9' => 9,
+            '*' => -1
+        ]
+    ];
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name');
+            ->add('name')
+            ->add('minNumOfModels')
+            ->add('maxNumOfModels')
+            ->add('points')
+            ->add('saveValue', ChoiceType::class, $this->choiceValues)
+            ->add('braveryValue', ChoiceType::class, $this->choiceValues)
+            ->add('numOfWounds', ChoiceType::class, $this->choiceValues)
+            ->add('spellsPerRound')
+            ->add('description', TextareaType::class)
+            ->add('faction', EntityType::class, [
+                'placeholder' => 'Choose a Faction',
+                'class' => FactionEntity::class,
+                'query_builder' => function(FactionRepository $repo) {
+                    return $repo->createAlphabeticalQueryBuilder();
+                }
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

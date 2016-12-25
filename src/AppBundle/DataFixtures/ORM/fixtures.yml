@@ -1,2 +1,15 @@
+AppBundle\Entity\FactionEntity:
+    factionentity:
+        name: A Faction
+
 AppBundle\Entity\AoSUnit:
-    name: Unit 1
+    aosunit:
+        name: Unit 1
+        minNumOfModels: 1
+        maxNumOfModels: 1
+        points: 50
+        saveValue: 5
+        braveryValue: 5
+        numOfWounds: 2
+        spellsPerRound: 0
+        description: Lorem ipsum dolor sit amet, modo elitr vocent te his, an brute consul accumsan cum. Eu suscipit gloriatur his, graece partiendo splendide et vim, sea et stet expetenda assentior. Scripta eruditi minimum eos ex, pri rebum ridens ad. Cu ius probo salutatus theophrastus, mel erat altera eripuit ex, eros atqui scripserit an nam. At altera intellegam eos, id usu amet stet. Nam quas debitis officiis ei, est decore assueverit persequeris at.

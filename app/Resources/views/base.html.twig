@@ -9,7 +9,7 @@
         <title>{% block title %}Welcome to Tyger's Hammer!{% endblock %}</title>
 
         {% block stylesheets %}
-            <link rel="stylesheet" href={{ asset('css/bootstrap/bootstrap.min.css') }} >
+            <link rel="stylesheet" href={{ asset('css/bootstrap/bootstrap.css') }} >
             <link rel="stylesheet" href={{ asset('css/main.css') }} >
             <link rel="stylesheet" href="{{ asset('css/font-awesome-4.7.0/css/font-awesome.min.css') }}">
         {% endblock %}
@@ -39,11 +39,33 @@
                             <li><a href="{{ path('list_units') }}">View Units</a></li>
                             <li><a href="#">Build New Army</a></li>
                             <li><a href="#">View Saved Army</a></li>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li class="dropdown">
+
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                       aria-haspopup="true" aria-expanded="false">
+
+                                            Manage Units
+                                            <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{{ path('add_units') }}">Add Unit</a></li>
+                                        <li><a href="#">Add Faction or Alliance</a></li>
+                                        <li><a href="#">Add Weapon and Damage</a></li>
+                                        <li><a href="#">Add Mount</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Add Ability</a></li>
+                                        <li><a href="#">Add Spell</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Add Pitched Battle Rule</a></li>
+                                        <li><a href="#">Add Battlefield Role</a></li>
+                                        <li><a href="#">Add Keyword</a></li>
+                                        <li><a href="#">Add Warscroll Battalion</a></li>
+                                    </ul>
+                                </li>
+                            {% endif %}
                             {% if is_granted('ROLE_SUPER_ADMIN') %}
-                                <li><a href="{{ path('add_units') }}">Add Units</a></li>
                                 <li><a href="#">Manage Users</a></li>
-                            {% elseif is_granted('ROLE_ADMIN') %}
-                                <li><a href="#">Edit Units</a></li>
                             {% endif %}
                         </ul>
 
