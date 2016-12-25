@@ -40,18 +40,18 @@
                             <li><a href="#">Build New Army</a></li>
                             <li><a href="#">View Saved Army</a></li>
                             {% if is_granted('ROLE_ADMIN') %}
-                                <li class="dropdown">
+                                <li><a href="{{ path('weapon_list') }}">Manage Weapons</a></li>
 
+                                <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                        aria-haspopup="true" aria-expanded="false">
-
                                             Manage Units
                                             <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a href="{{ path('add_units') }}">Add Unit</a></li>
                                         <li><a href="#">Add Faction or Alliance</a></li>
-                                        <li><a href="#">Add Weapon and Damage</a></li>
+                                        <li><a href="{{ path('weapon_add') }}">Add Weapon</a></li>
                                         <li><a href="#">Add Mount</a></li>
                                         <li role="separator" class="divider"></li>
                                         <li><a href="#">Add Ability</a></li>

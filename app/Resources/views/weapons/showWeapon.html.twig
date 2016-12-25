@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+
+    <div class="container">
+        <div class="container unit-table-container">
+            <h2 class="text-center">{{ weapon.weaponName }}</h2>
+
+            <table class="table table-bordered table-responsive text-center">
+                <tr>
+                    <th class="text-center">Description</th>
+                    <th class="text-center">Value</th>
+                </tr>
+                <tr>
+                    <td>Min Weapon Range:</td>
+                    <td>{{ weapon.minRange }}</td>
+                </tr>
+
+                <tr>
+                    <td>Max Weapon Range:</td>
+                    <td>{{ weapon.maxRange }}</td>
+                </tr>
+                <tr>
+                    <td>Number of Attacks:</td>
+                    <td>{{ weapon.attacks }}</td>
+                </tr>
+                <tr>
+                    <td>To Hit:</td>
+                    <td>{{ weapon.toHit }}</td>
+                </tr>
+                <tr>
+                    <td>To Wound:</td>
+                    <td>{{ weapon.toWound}}</td>
+                </tr>
+                <tr>
+                    <td>Weapon Type:</td>
+                    <td>{{ weapon.weaponType }}</td>
+                </tr>
+                {#<tr>#}
+                    {#<td>Wounds:</td>#}
+                    {#<td>{{ weapon.numOfWounds }}</td>#}
+                {#</tr>#}
+                {#<tr>#}
+                    {#<td>Spells per Round:</td>#}
+                    {#<td>{{ weapon.spellsPerRound }}</td>#}
+                {#</tr>#}
+                {#<tr>#}
+                    {#<td>Description:</td>#}
+                    {#<td>{{ weapon.description }}</td>#}
+                {#</tr>#}
+            </table>
+        </div>
+    </div>
+{% endblock %}
