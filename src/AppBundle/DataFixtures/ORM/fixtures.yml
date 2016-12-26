@@ -27,3 +27,15 @@ AppBundle\Entity\WeaponsEntity:
         dmgDeterminer: dice
         numberOfDmgDice: 1
         maxDieDmgValue: 3
+
+AppBundle\Entity\AbilityEntity:
+    ability:
+        name: test ability
+        description: Lorem ipsum dolor sit amet, laoreet albucius mea an, in falli reformidans vis. Usu prima fastidii lobortis cu, eam oratio latine appellantur ea. Eu nostro laboramus eam, ea ius summo fierent. Cu alterum lucilius tractatos mei, ad his homero nostrum, te possit inciderint nam.
+        commandAbility: false
+
+AppBundle\Entity\SpellEntity:
+    spell:
+        name: test ability
+        description: Lorem ipsum dolor sit amet, laoreet albucius mea an, in falli reformidans vis. Usu prima fastidii lobortis cu, eam oratio latine appellantur ea. Eu nostro laboramus eam, ea ius summo fierent. Cu alterum lucilius tractatos mei, ad his homero nostrum, te possit inciderint nam.
+        

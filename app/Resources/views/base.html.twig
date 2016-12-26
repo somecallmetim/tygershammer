@@ -16,8 +16,6 @@
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
-    <body>
-        {% block body %}
             <div class="container">
             <nav class="navbar navbar-inverse">
                 <div class="container-fluid">
@@ -54,8 +52,8 @@
                                         <li><a href="{{ path('weapon_add') }}">Add Weapon</a></li>
                                         <li><a href="#">Add Mount</a></li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="#">Add Ability</a></li>
-                                        <li><a href="#">Add Spell</a></li>
+                                        <li><a href="{{ path('ability_new') }}">Add Ability</a></li>
+                                        <li><a href="{{ path('spell_new') }}">Add Spell</a></li>
                                         <li role="separator" class="divider"></li>
                                         <li><a href="#">Add Pitched Battle Rule</a></li>
                                         <li><a href="#">Add Battlefield Role</a></li>
@@ -94,11 +92,14 @@
 
 
         </div><!-- end "container" -->
+    <body>
+        {% block body %}
         {% endblock %}
+    </body>
         {% block javascripts %}
             <script src={{ asset('js/jquery-3.1.1.min.js') }}></script>
             <script src= {{ asset('js/bootstrap.min.js') }}></script>
             <script src={{ asset('js/carousel.js') }}></script>
         {% endblock %}
-    </body>
+
 </html>

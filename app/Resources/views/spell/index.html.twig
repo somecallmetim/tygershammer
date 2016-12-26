@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+   <div class="container">
+       <h1>Spellentities list</h1>
+
+       <table>
+           <thead>
+           <tr>
+               <th>Id</th>
+               <th>Name</th>
+               <th>Description</th>
+               <th>Actions</th>
+           </tr>
+           </thead>
+           <tbody>
+           {% for spellEntity in spellEntities %}
+               <tr>
+                   <td><a href="{{ path('spell_show', { 'id': spellEntity.id }) }}">{{ spellEntity.id }}</a></td>
+                   <td>{{ spellEntity.name }}</td>
+                   <td>{{ spellEntity.description }}</td>
+                   <td>
+                       <ul>
+                           <li>
+                               <a href="{{ path('spell_show', { 'id': spellEntity.id }) }}">show</a>
+                           </li>
+                           <li>
+                               <a href="{{ path('spell_edit', { 'id': spellEntity.id }) }}">edit</a>
+                           </li>
+                       </ul>
+                   </td>
+               </tr>
+           {% endfor %}
+           </tbody>
+       </table>
+
+       <ul>
+           <li>
+               <a href="{{ path('spell_new') }}">Create a new spellEntity</a>
+           </li>
+       </ul>
+   </div>
+{% endblock %}

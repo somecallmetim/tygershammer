@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>Ability list</h1>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Commandability</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for abilityEntity in abilityEntities %}
+                <tr>
+                    <td><a href="{{ path('ability_show', { 'id': abilityEntity.id }) }}">{{ abilityEntity.id }}</a></td>
+                    <td>{{ abilityEntity.name }}</td>
+                    <td>{{ abilityEntity.description }}</td>
+                    <td>{% if abilityEntity.commandAbility %}Yes{% else %}No{% endif %}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('ability_show', { 'id': abilityEntity.id }) }}">show</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('ability_edit', { 'id': abilityEntity.id }) }}">edit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <ul>
+            <li>
+                <a href="{{ path('ability_new') }}">Create a new abilityEntity</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
