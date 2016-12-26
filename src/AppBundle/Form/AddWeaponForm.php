@@ -34,6 +34,12 @@ class AddWeaponForm extends AbstractType
             ->add('weaponName')
             ->add('minRange')
             ->add('maxRange')
+            ->add('weaponType', ChoiceType::class, [
+                'choices' => [
+                    'melee' => 'melee',
+                    'ranged' => 'ranged'
+                ]
+            ])
             ->add('attacks', ChoiceType::class, $this->choiceValues)
             ->add('toHit', ChoiceType::class, $this->choiceValues)
             ->add('toWound', ChoiceType::class, $this->choiceValues)
@@ -45,6 +51,7 @@ class AddWeaponForm extends AbstractType
             ])
             ->add('maxDieDmgValue', ChoiceType::class, [
                 'choices' => [
+                    'Please select a value' => null,
                     '3' => 3,
                     '6' => 6
                 ]
