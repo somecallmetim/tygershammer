@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\CRUD;
 
 use AppBundle\Entity\SpellEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -26,7 +26,7 @@ class SpellEntityController extends Controller
 
         $spellEntities = $em->getRepository('AppBundle:SpellEntity')->findAll();
 
-        return $this->render('spell/index.html.twig', array(
+        return $this->render('crud/spell/index.html.twig', array(
             'spellEntities' => $spellEntities,
         ));
     }
@@ -51,7 +51,7 @@ class SpellEntityController extends Controller
             return $this->redirectToRoute('spell_show', array('id' => $spellEntity->getId()));
         }
 
-        return $this->render('spell/new.html.twig', array(
+        return $this->render('crud/spell/new.html.twig', array(
             'spellEntity' => $spellEntity,
             'form' => $form->createView(),
         ));
@@ -67,7 +67,7 @@ class SpellEntityController extends Controller
     {
         $deleteForm = $this->createDeleteForm($spellEntity);
 
-        return $this->render('spell/show.html.twig', array(
+        return $this->render('crud/spell/show.html.twig', array(
             'spellEntity' => $spellEntity,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -91,7 +91,7 @@ class SpellEntityController extends Controller
             return $this->redirectToRoute('spell_edit', array('id' => $spellEntity->getId()));
         }
 
-        return $this->render('spell/edit.html.twig', array(
+        return $this->render('crud/spell/edit.html.twig', array(
             'spellEntity' => $spellEntity,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

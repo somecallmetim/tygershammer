@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>Battlefieldroles list</h1>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for battlefieldRole in battlefieldRoles %}
+                <tr>
+                    <td><a href="{{ path('battlefieldrole_show', { 'id': battlefieldRole.id }) }}">{{ battlefieldRole.id }}</a></td>
+                    <td>{{ battlefieldRole.name }}</td>
+                    <td>{{ battlefieldRole.description }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('battlefieldrole_show', { 'id': battlefieldRole.id }) }}">show</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('battlefieldrole_edit', { 'id': battlefieldRole.id }) }}">edit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <ul>
+            <li>
+                <a href="{{ path('battlefieldrole_new') }}">Create a new battlefieldRole</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

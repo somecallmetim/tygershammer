@@ -4,14 +4,15 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <h1>Edit Unit</h1>
+                <h1>Add Unit</h1>
+
 
                 {{ form_start(form) }}
-                    {{ include('units/_unitsForm.html.twig') }}
 
-                    <a href="{{ path('unit_delete', {'id': unit.id}) }}" class="btn btn-danger">Delete Unit</a>
+                    {{ include('crud/units/_unitsForm.html.twig') }}
+
                     <button type="submit" class="btn btn-primary" formnovalidate>
-                        Submit Changes
+                        Submit
                     </button>
                 {{ form_end(form) }}
             </div>

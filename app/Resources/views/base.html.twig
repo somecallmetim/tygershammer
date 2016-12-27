@@ -48,17 +48,17 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a href="{{ path('add_units') }}">Add Unit</a></li>
-                                        <li><a href="#">Add Faction or Alliance</a></li>
+                                        <li><a href="{{ path('faction_new') }}">Add Faction or Alliance</a></li>
                                         <li><a href="{{ path('weapon_add') }}">Add Weapon</a></li>
-                                        <li><a href="#">Add Mount</a></li>
+                                        <li><a href="{{ path('mount_new') }}">Add Mount</a></li>
                                         <li role="separator" class="divider"></li>
                                         <li><a href="{{ path('ability_new') }}">Add Ability</a></li>
                                         <li><a href="{{ path('spell_new') }}">Add Spell</a></li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="#">Add Pitched Battle Rule</a></li>
-                                        <li><a href="#">Add Battlefield Role</a></li>
-                                        <li><a href="#">Add Keyword</a></li>
-                                        <li><a href="#">Add Warscroll Battalion</a></li>
+                                        <li><a href="{{ path('pitchedBattleRules_new') }}">Add Pitched Battle Rule</a></li>
+                                        <li><a href="{{ path('battlefieldrole_new') }}">Add Battlefield Role</a></li>
+                                        <li><a href="{{ path('keyword_new') }}">Add Keyword</a></li>
+                                        <li><a href="{{ path('warscrollbattalion_new') }}">Add Warscroll Battalion</a></li>
                                     </ul>
                                 </li>
                             {% endif %}

@@ -6,7 +6,7 @@
  * Time: 12:55 AM
  */
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\CRUD;
 
 
 use AppBundle\Entity\AoSUnit;
@@ -28,7 +28,7 @@ class AoSUnitsController extends Controller
         $units = $em->getRepository('AppBundle:AoSUnit')
             ->findAll();
 
-        return $this->render('units/list.html.twig', [
+        return $this->render('crud/units/list.html.twig', [
             'units' => $units
         ]);
     }
@@ -53,14 +53,14 @@ class AoSUnitsController extends Controller
 
             return $this->redirectToRoute('list_units');
         }
-        return $this->render('units/addUnits.html.twig', [
+        return $this->render('crud/units/addUnits.html.twig', [
             'form' => $form->createView()
         ]);
     }
 
     /**
      * @Security("is_granted('ROLE_ADMIN')")
-     * @Route("/units/edit/{name}", name="unit_edit")
+     * @Route("/crud/units/edit/{name}", name="unit_edit")
      */
     public function editAction(Request $request, AoSUnit $unit){
         $form = $this->createForm(AddUnitForm::class, $unit);
@@ -76,7 +76,7 @@ class AoSUnitsController extends Controller
 
             return $this->redirectToRoute('list_units');
         }
-        return $this->render('units/editUnit.html.twig', [
+        return $this->render('crud/units/editUnit.html.twig', [
             'form' => $form->createView(),
             'unit' => $unit
         ]);
@@ -84,7 +84,7 @@ class AoSUnitsController extends Controller
 
     /**
      * @Security("is_granted('ROLE_ADMIN')")
-     * @Route("/units/delete/{id}", name="unit_delete")
+     * @Route("/crud/units/delete/{id}", name="unit_delete")
      *
      */
     public function removeUnitAction($id){
@@ -97,10 +97,10 @@ class AoSUnitsController extends Controller
     }
 
     /**
-     * @Route("units/{name}", name="show_unit")
+     * @Route("crud/units/{name}", name="show_unit")
      */
     public function showAction(AoSUnit $unit){
-        return $this->render('units/showUnit.html.twig', [
+        return $this->render('crud/units/showUnit.html.twig', [
             'unit' => $unit
         ]);
     }

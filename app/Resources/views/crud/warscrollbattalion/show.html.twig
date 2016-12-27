@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>Warscrollbattalion</h1>
+
+        <table>
+            <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ warscrollBattalion.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ warscrollBattalion.name }}</td>
+            </tr>
+            <tr>
+                <th>Additionalpoints</th>
+                <td>{{ warscrollBattalion.additionalPoints }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <ul>
+            <li>
+                <a href="{{ path('warscrollbattalion_index') }}">Back to the list</a>
+            </li>
+            <li>
+                <a href="{{ path('warscrollbattalion_edit', { 'id': warscrollBattalion.id }) }}">Edit</a>
+            </li>
+            <li>
+                {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+                {{ form_end(delete_form) }}
+            </li>
+        </ul>
+    </div>
+{% endblock %}

@@ -6,7 +6,7 @@
  * Time: 7:26 PM
  */
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\CRUD;
 
 
 use AppBundle\Entity\WeaponsEntity;
@@ -28,7 +28,7 @@ class WeaponsController extends Controller
      * @Route("/weapon/show/{weaponName}", name="weapon_show")
      */
     public function showWeaponAction(WeaponsEntity $weapon){
-        return $this->render('weapons/showWeapon.html.twig', [
+        return $this->render('crud/weapons/showWeapon.html.twig', [
             'weapon' => $weapon
         ]);
     }
@@ -42,7 +42,7 @@ class WeaponsController extends Controller
         $weapons = $em->getRepository('AppBundle:WeaponsEntity')
             ->findAll();
 
-        return $this->render('weapons/listWeapons.html.twig', [
+        return $this->render('crud/weapons/listWeapons.html.twig', [
             'weapons' => $weapons
         ]);
     }
@@ -61,7 +61,7 @@ class WeaponsController extends Controller
             return $this->redirectToRoute('weapon_list');
         }
 
-        return $this->render('weapons/addWeapon.html.twig', [
+        return $this->render('crud/weapons/addWeapon.html.twig', [
             'form' => $form->createView()
             ]);
     }
@@ -80,7 +80,7 @@ class WeaponsController extends Controller
             return $this->redirectToRoute('weapon_list');
         }
 
-        return $this->render('weapons/editWeapon.html.twig', [
+        return $this->render('crud/weapons/editWeapon.html.twig', [
            'form' => $form->createView(),
             'weapon' => $weapon
         ]);

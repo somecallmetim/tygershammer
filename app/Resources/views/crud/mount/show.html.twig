@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>Mount</h1>
+
+        <table>
+            <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ mount.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ mount.name }}</td>
+            </tr>
+            <tr>
+                <th>Movement</th>
+                <td>{{ mount.movement }}</td>
+            </tr>
+            <tr>
+                <th>Canfly</th>
+                <td>{% if mount.canFly %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <ul>
+            <li>
+                <a href="{{ path('mount_index') }}">Back to the list</a>
+            </li>
+            <li>
+                <a href="{{ path('mount_edit', { 'id': mount.id }) }}">Edit</a>
+            </li>
+            <li>
+                {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+                {{ form_end(delete_form) }}
+            </li>
+        </ul>
+    </div>
+{% endblock %}

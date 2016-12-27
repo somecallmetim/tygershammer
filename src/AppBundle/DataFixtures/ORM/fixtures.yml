@@ -38,4 +38,32 @@ AppBundle\Entity\SpellEntity:
     spell:
         name: test ability
         description: Lorem ipsum dolor sit amet, laoreet albucius mea an, in falli reformidans vis. Usu prima fastidii lobortis cu, eam oratio latine appellantur ea. Eu nostro laboramus eam, ea ius summo fierent. Cu alterum lucilius tractatos mei, ad his homero nostrum, te possit inciderint nam.
-        
+
+AppBundle\Entity\PitchedBattleRuleEntity:
+    pitched_battle_rule_entity:
+        name: test rule
+        description: Lorem ipsum dolor sit amet, laoreet albucius mea an, in falli reformidans vis. Usu prima fastidii lobortis cu, eam oratio latine appellantur ea. Eu nostro laboramus eam, ea ius summo fierent. Cu alterum lucilius tractatos mei, ad his homero nostrum, te possit inciderint nam.
+
+AppBundle\Entity\Keyword:
+    keyword:
+        name: keyword test
+
+AppBundle\Entity\Mount:
+    mount:
+        name: test horse
+        movement: 10
+        can_fly: false
+
+AppBundle\Entity\BattlefieldRole:
+    battlefield_role:
+        name: test role
+        description: Lorem ipsum dolor sit amet, laoreet albucius mea an, in falli reformidans vis. Usu prima fastidii lobortis cu, eam oratio latine appellantur ea. Eu nostro laboramus eam, ea ius summo fierent. Cu alterum lucilius tractatos mei, ad his homero nostrum, te possit inciderint nam.
+
+AppBundle\Entity\WarscrollBattalion:
+    warscroll_battalion:
+        name: test battalion
+        additionalPoints: 10
+
+AppBundle\Entity\Alliance:
+    alliance:
+        name: Order

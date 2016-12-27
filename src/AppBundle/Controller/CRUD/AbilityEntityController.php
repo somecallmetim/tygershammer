@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\CRUD;
 
 use AppBundle\Entity\AbilityEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -26,7 +26,7 @@ class AbilityEntityController extends Controller
 
         $abilityEntities = $em->getRepository('AppBundle:AbilityEntity')->findAll();
 
-        return $this->render('ability/index.html.twig', array(
+        return $this->render('crud/ability/index.html.twig', array(
             'abilityEntities' => $abilityEntities,
         ));
     }
@@ -51,7 +51,7 @@ class AbilityEntityController extends Controller
             return $this->redirectToRoute('ability_show', array('id' => $abilityEntity->getId()));
         }
 
-        return $this->render('ability/new.html.twig', array(
+        return $this->render('crud/ability/new.html.twig', array(
             'abilityEntity' => $abilityEntity,
             'form' => $form->createView(),
         ));
@@ -67,7 +67,7 @@ class AbilityEntityController extends Controller
     {
         $deleteForm = $this->createDeleteForm($abilityEntity);
 
-        return $this->render('ability/show.html.twig', array(
+        return $this->render('crud/ability/show.html.twig', array(
             'abilityEntity' => $abilityEntity,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -91,7 +91,7 @@ class AbilityEntityController extends Controller
             return $this->redirectToRoute('ability_edit', array('id' => $abilityEntity->getId()));
         }
 
-        return $this->render('ability/edit.html.twig', array(
+        return $this->render('crud/ability/edit.html.twig', array(
             'abilityEntity' => $abilityEntity,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

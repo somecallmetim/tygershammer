@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>Factionentities list</h1>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for factionEntity in factionEntities %}
+                <tr>
+                    <td><a href="{{ path('faction_show', { 'id': factionEntity.id }) }}">{{ factionEntity.id }}</a></td>
+                    <td>{{ factionEntity.name }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('faction_show', { 'id': factionEntity.id }) }}">show</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('faction_edit', { 'id': factionEntity.id }) }}">edit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <ul>
+            <li>
+                <a href="{{ path('faction_new') }}">Create a new factionEntity</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
