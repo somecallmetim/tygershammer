@@ -17,7 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Table(name="weapon")
  * @UniqueEntity(fields={"weaponName"}, message="This weapon already exists")
  */
-class WeaponsEntity
+class Weapon
 {
     /**
      * @ORM\Id

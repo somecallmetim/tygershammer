@@ -1,11 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/unit_table.css') }}">
-{% endblock %}
-
 {% block body %}
-    {{ parent() }}
     <div class="container">
         <div class="container unit-table-container">
             <h2 class="text-center">{{ unit.name }}</h2>
@@ -56,5 +51,10 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/unit_table.css') }}">
 {% endblock %}
 

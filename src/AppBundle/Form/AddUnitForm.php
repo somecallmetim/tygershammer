@@ -9,7 +9,7 @@
 namespace AppBundle\Form;
 
 
-use AppBundle\Entity\FactionEntity;
+use AppBundle\Entity\Faction;
 use AppBundle\Repository\FactionRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -18,7 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use AppBundle\Entity\AoSUnit;
+use AppBundle\Entity\Unit;
 
 class AddUnitForm extends AbstractType
 {
@@ -53,7 +53,7 @@ class AddUnitForm extends AbstractType
             ->add('description', TextareaType::class)
             ->add('faction', EntityType::class, [
                 'placeholder' => 'Choose a Faction',
-                'class' => FactionEntity::class,
+                'class' => Faction::class,
                 'query_builder' => function(FactionRepository $repo) {
                     return $repo->createAlphabeticalQueryBuilder();
                 }
@@ -64,7 +64,7 @@ class AddUnitForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'AppBundle\Entity\AoSUnit'
+            'data_class' => 'AppBundle\Entity\Unit'
         ]);
     }
 }

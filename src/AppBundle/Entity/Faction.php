@@ -2,23 +2,20 @@
 /**
  * Created by PhpStorm.
  * User: timbauer
- * Date: 12/23/16
- * Time: 5:09 AM
+ * Date: 1/13/17
+ * Time: 9:31 AM
  */
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="AppBundle\Repository\FactionRepository")
+ * @ORM\Entity
  * @ORM\Table(name="faction")
- * @UniqueEntity(fields={"name"}, message="This Unit already exists")
  */
-class FactionEntity
+class Faction
 {
     /**
      * @ORM\Id
@@ -32,24 +29,36 @@ class FactionEntity
      */
     private $name;
 
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * @param mixed $name
+     */
     public function setName($name)
     {
         $this->name = $name;
-    }
-
-    function __toString()
-    {
-        return $this->name;
     }
 
 

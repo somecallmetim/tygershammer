@@ -43,22 +43,22 @@
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                        aria-haspopup="true" aria-expanded="false">
-                                            Manage Units
+                                            Manage Entities
                                             <span class="caret"></span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="{{ path('add_units') }}">Add Unit</a></li>
-                                        <li><a href="{{ path('faction_new') }}">Add Faction or Alliance</a></li>
-                                        <li><a href="{{ path('weapon_add') }}">Add Weapon</a></li>
-                                        <li><a href="{{ path('mount_new') }}">Add Mount</a></li>
+                                        <li><a href="{{ path('list_units') }}">Units</a></li>
+                                        {#<li><a href="{{ path('faction_index') }}">Factions</a></li>#}
+                                        <li><a href="{{ path('weapon_list') }}">Weapons</a></li>
+                                        {#<li><a href="{{ path('mount_index') }}">Mounts</a></li>#}
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="{{ path('ability_new') }}">Add Ability</a></li>
-                                        <li><a href="{{ path('spell_new') }}">Add Spell</a></li>
+                                        {#<li><a href="{{ path('ability_index') }}">Abilities</a></li>#}
+                                        {#<li><a href="{{ path('spell_index') }}">Spells</a></li>#}
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="{{ path('pitchedBattleRules_new') }}">Add Pitched Battle Rule</a></li>
-                                        <li><a href="{{ path('battlefieldrole_new') }}">Add Battlefield Role</a></li>
-                                        <li><a href="{{ path('keyword_new') }}">Add Keyword</a></li>
-                                        <li><a href="{{ path('warscrollbattalion_new') }}">Add Warscroll Battalion</a></li>
+                                        {#<li><a href="{{ path('pitchedBattleRules_index') }}">Pitched Battle Rules</a></li>#}
+                                        {#<li><a href="{{ path('battlefieldrole_index') }}">Battlefield Roles</a></li>#}
+                                        {#<li><a href="{{ path('keyword_index') }}">Keywords</a></li>#}
+                                        {#<li><a href="{{ path('warscrollbattalion_index') }}">Warscroll Battalions</a></li>#}
                                     </ul>
                                 </li>
                             {% endif %}

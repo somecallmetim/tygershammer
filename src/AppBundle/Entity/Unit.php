@@ -11,13 +11,14 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use AppBundle\Entity\Faction;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="aos_unit")
+ * @ORM\Table(name="unit")
  * @UniqueEntity(fields={"name"}, message="This Unit already exists")
  */
-class AoSUnit
+class Unit
 {
     /**
      * @ORM\Id
@@ -33,7 +34,7 @@ class AoSUnit
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\FactionEntity")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Faction")
      * @ORM\JoinColumn(nullable=false)
      */
     private $faction;

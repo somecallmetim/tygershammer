@@ -1,69 +1,69 @@
-AppBundle\Entity\FactionEntity:
-    factionentity:
-        name: A Faction
+AppBundle\Entity\Faction:
+    factionentity_{1..10}:
+        name: Faction <current()>
 
-AppBundle\Entity\AoSUnit:
-    aosunit:
-        name: Unit 1
-        faction: '@factionentity'
-        minNumOfModels: 1
-        maxNumOfModels: 1
-        points: 50
-        saveValue: 5
-        braveryValue: 5
-        numOfWounds: 2
-        spellsPerRound: 0
-        description: Lorem ipsum dolor sit amet, modo elitr vocent te his, an brute consul accumsan cum. Eu suscipit gloriatur his, graece partiendo splendide et vim, sea et stet expetenda assentior. Scripta eruditi minimum eos ex, pri rebum ridens ad. Cu ius probo salutatus theophrastus, mel erat altera eripuit ex, eros atqui scripserit an nam. At altera intellegam eos, id usu amet stet. Nam quas debitis officiis ei, est decore assueverit persequeris at.
+AppBundle\Entity\Unit:
+    aosunit_{1..10}:
+        name: Unit <current()>
+        faction: '@factionentity_*'
+        minNumOfModels: <numberBetween(1, 15)>
+        maxNumOfModels: <numberBetween(15, 45)>
+        points: <numberBetween(50, 500)>
+        saveValue: <numberBetween(1, 6)>
+        braveryValue: <numberBetween(1, 6)>
+        numOfWounds: <numberBetween(1, 6)>
+        spellsPerRound: <numberBetween(1, 6)>
+        description: <paragraph()>
 
-AppBundle\Entity\WeaponsEntity:
-    weapon:
-        weaponName: Weapon 1
+AppBundle\Entity\Weapon:
+    weapon_{1..10}:
+        weaponName: Weapon <current()>
         minRange: 0
-        maxRange: 2
-        attacks: 2
-        toHit: 4
-        toWound: 4
-        weaponType: melee
+        maxRange: <numberBetween(1, 45)>
+        attacks: <numberBetween(1, 6)>
+        toHit: <numberBetween(1, 6)>
+        toWound: <numberBetween(1, 6)>
+        weaponType: '50%? melee : ranged'
         dmgDeterminer: dice
         numberOfDmgDice: 1
         maxDieDmgValue: 3
 
-AppBundle\Entity\AbilityEntity:
-    ability:
-        name: test ability
-        description: Lorem ipsum dolor sit amet, laoreet albucius mea an, in falli reformidans vis. Usu prima fastidii lobortis cu, eam oratio latine appellantur ea. Eu nostro laboramus eam, ea ius summo fierent. Cu alterum lucilius tractatos mei, ad his homero nostrum, te possit inciderint nam.
-        commandAbility: false
-
-AppBundle\Entity\SpellEntity:
-    spell:
-        name: test ability
-        description: Lorem ipsum dolor sit amet, laoreet albucius mea an, in falli reformidans vis. Usu prima fastidii lobortis cu, eam oratio latine appellantur ea. Eu nostro laboramus eam, ea ius summo fierent. Cu alterum lucilius tractatos mei, ad his homero nostrum, te possit inciderint nam.
-
-AppBundle\Entity\PitchedBattleRuleEntity:
-    pitched_battle_rule_entity:
-        name: test rule
-        description: Lorem ipsum dolor sit amet, laoreet albucius mea an, in falli reformidans vis. Usu prima fastidii lobortis cu, eam oratio latine appellantur ea. Eu nostro laboramus eam, ea ius summo fierent. Cu alterum lucilius tractatos mei, ad his homero nostrum, te possit inciderint nam.
-
-AppBundle\Entity\Keyword:
-    keyword:
-        name: keyword test
-
-AppBundle\Entity\Mount:
-    mount:
-        name: test horse
-        movement: 10
-        can_fly: false
-
-AppBundle\Entity\BattlefieldRole:
-    battlefield_role:
-        name: test role
-        description: Lorem ipsum dolor sit amet, laoreet albucius mea an, in falli reformidans vis. Usu prima fastidii lobortis cu, eam oratio latine appellantur ea. Eu nostro laboramus eam, ea ius summo fierent. Cu alterum lucilius tractatos mei, ad his homero nostrum, te possit inciderint nam.
-
-AppBundle\Entity\WarscrollBattalion:
-    warscroll_battalion:
-        name: test battalion
-        additionalPoints: 10
-
-AppBundle\Entity\Alliance:
-    alliance:
-        name: Order
+#AppBundle\Entity\Ability:
+#    ability_{1..10}:
+#        name: ability <current()>
+#        description: <paragraph()>
+#        commandAbility: false
+#
+#AppBundle\Entity\Spell:
+#    spell_{1..10}:
+#        name: spell <current()>
+#        description: <paragraph()>
+#
+#AppBundle\Entity\PitchedBattleRule:
+#    pitched_battle_rule_entity_{1..10}:
+#        name: rule <current()>
+#        description: <paragraph()>
+#
+#AppBundle\Entity\Keyword:
+#    keyword_{1..10}:
+#        name: keyword <current()>
+#
+#AppBundle\Entity\Mount:
+#    mount_{1..10}:
+#        name: mount <current()>
+#        movement: <numberBetween(1, 10)>
+#        can_fly: false
+#
+#AppBundle\Entity\BattlefieldRole:
+#    battlefield_role_{1..10}:
+#        name: role <current()>
+#        description: <paragraph()>
+#
+#AppBundle\Entity\WarscrollBattalion:
+#    warscroll_battalion_{1..10}:
+#        name: battalion <current()>
+#        additionalPoints: <numberBetween(10, 50)>
+#
+#AppBundle\Entity\Alliance:
+#    alliance_{1..4}:
+#        name: alliance <current()>

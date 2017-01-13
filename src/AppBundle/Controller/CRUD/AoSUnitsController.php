@@ -9,7 +9,7 @@
 namespace AppBundle\Controller\CRUD;
 
 
-use AppBundle\Entity\AoSUnit;
+use AppBundle\Entity\Unit;
 use AppBundle\Form\AddUnitForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -25,7 +25,7 @@ class AoSUnitsController extends Controller
     public function listAction(){
         $em = $this->getDoctrine()->getManager();
 
-        $units = $em->getRepository('AppBundle:AoSUnit')
+        $units = $em->getRepository('AppBundle:Unit')
             ->findAll();
 
         return $this->render('crud/units/list.html.twig', [
@@ -53,7 +53,7 @@ class AoSUnitsController extends Controller
 
             return $this->redirectToRoute('list_units');
         }
-        return $this->render('crud/units/addUnits.html.twig', [
+        return $this->render('crud/units/new.html.twig', [
             'form' => $form->createView()
         ]);
     }
@@ -62,7 +62,7 @@ class AoSUnitsController extends Controller
      * @Security("is_granted('ROLE_ADMIN')")
      * @Route("/crud/units/edit/{name}", name="unit_edit")
      */
-    public function editAction(Request $request, AoSUnit $unit){
+    public function editAction(Request $request, Unit $unit){
         $form = $this->createForm(AddUnitForm::class, $unit);
 
         $form->handleRequest($request);
@@ -76,7 +76,7 @@ class AoSUnitsController extends Controller
 
             return $this->redirectToRoute('list_units');
         }
-        return $this->render('crud/units/editUnit.html.twig', [
+        return $this->render('crud/units/edit.html.twig', [
             'form' => $form->createView(),
             'unit' => $unit
         ]);
@@ -90,7 +90,7 @@ class AoSUnitsController extends Controller
     public function removeUnitAction($id){
         $em = $this->getDoctrine()->getManager();
 
-        $unit = $em->getRepository('AppBundle:AoSUnit')->find($id);
+        $unit = $em->getRepository('AppBundle:Unit')->find($id);
         $em->remove($unit);
         $em->flush();
         return $this->redirectToRoute('list_units');
@@ -99,8 +99,8 @@ class AoSUnitsController extends Controller
     /**
      * @Route("crud/units/{name}", name="show_unit")
      */
-    public function showAction(AoSUnit $unit){
-        return $this->render('crud/units/showUnit.html.twig', [
+    public function showAction(Unit $unit){
+        return $this->render('crud/units/show.html.twig', [
             'unit' => $unit
         ]);
     }
