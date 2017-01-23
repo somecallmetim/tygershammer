@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="container unit-table-container">
+            <h2 class="text-center">{{ entity.name }}</h2>
+
+            <table class="table table-bordered table-responsive text-center">
+                <tr>
+                    <th class="text-center">Description</th>
+                    <th class="text-center">Value</th>
+                </tr>
+                {% for key, value in attributes %}
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ value }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/entity_table.css') }}">
+{% endblock %}

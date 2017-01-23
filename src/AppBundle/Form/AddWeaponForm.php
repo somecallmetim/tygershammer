@@ -31,7 +31,7 @@ class AddWeaponForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('weaponName')
+            ->add('name')
             ->add('minRange')
             ->add('maxRange')
             ->add('weaponType', ChoiceType::class, [
@@ -64,7 +64,7 @@ class AddWeaponForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'AppBundle\Entity\WeaponsEntity'
+            'data_class' => 'AppBundle\Entity\Weapon'
         ]);
     }
 

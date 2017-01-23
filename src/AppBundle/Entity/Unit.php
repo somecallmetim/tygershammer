@@ -9,6 +9,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use AppBundle\Entity\Faction;
@@ -20,64 +22,65 @@ use AppBundle\Entity\Faction;
  */
 class Unit
 {
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
      */
-    private $name;
+    protected $name;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Faction")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $faction;
+    protected $faction;
 
     /**
      * @ORM\Column(type="smallint")
      */
-    private $minNumOfModels = 1;
+    protected $minNumOfModels = 1;
 
     /**
      * @ORM\Column(type="smallint")
      */
-    private $maxNumOfModels = 1;
+    protected $maxNumOfModels = 1;
 
     /**
      * @ORM\Column(type="smallint")
      */
-    private $points;
+    protected $points;
 
     /**
      * @ORM\Column(type="smallint")
      */
-    private $saveValue;
+    protected $saveValue;
 
     /**
      * @ORM\Column(type="smallint")
      */
-    private $braveryValue;
+    protected $braveryValue;
 
     /**
      * @ORM\Column(type="smallint")
      */
-    private $numOfWounds = 1;
+    protected $numOfWounds = 1;
 
     /**
      * @ORM\Column(type="smallint")
      */
-    private $spellsPerRound = 0;
+    protected $spellsPerRound = 0;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $description;
+    protected $description;
 
     public function getName()
     {

@@ -12,7 +12,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\FactionRepository")
  * @ORM\Table(name="faction")
  */
 class Faction
@@ -59,6 +59,11 @@ class Faction
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    function __toString()
+    {
+        return $this->name;
     }
 
 

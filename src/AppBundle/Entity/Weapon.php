@@ -15,7 +15,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity
  * @ORM\Table(name="weapon")
- * @UniqueEntity(fields={"weaponName"}, message="This weapon already exists")
+ * @UniqueEntity(fields={"name"}, message="This weapon already exists")
  */
 class Weapon
 {
@@ -28,7 +28,7 @@ class Weapon
     /**
      * @ORM\Column(type="string")
      */
-    private $weaponName;
+    private $name;
     /**
      * @ORM\Column(type="smallint")
      */
@@ -87,17 +87,17 @@ class Weapon
     /**
      * @return mixed
      */
-    public function getWeaponName()
+    public function getName()
     {
-        return $this->weaponName;
+        return $this->name;
     }
 
     /**
-     * @param mixed $weaponName
+     * @param mixed $name
      */
-    public function setWeaponName($weaponName)
+    public function setName($name)
     {
-        $this->weaponName = $weaponName;
+        $this->name = $name;
     }
 
     /**
@@ -259,4 +259,6 @@ class Weapon
     {
         $this->staticDmg = $staticDmg;
     }
+
+
 }

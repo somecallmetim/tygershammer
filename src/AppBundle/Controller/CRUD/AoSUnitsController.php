@@ -9,6 +9,7 @@
 namespace AppBundle\Controller\CRUD;
 
 
+use AppBundle\Controller\AbstractCRUDController;
 use AppBundle\Entity\Unit;
 use AppBundle\Form\AddUnitForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -17,7 +18,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class AoSUnitsController extends Controller
+class AoSUnitsController extends AbstractCRUDController
 {
     /**
      * @Route("/units", name="list_units")
@@ -29,7 +30,23 @@ class AoSUnitsController extends Controller
             ->findAll();
 
         return $this->render('crud/units/list.html.twig', [
-            'units' => $units
+            'entities' => $units,
+            'routes'   => $this->routes,
+            'entityName' => $this->entityName
+        ]);
+    }
+
+    /**
+     * @Route("crud/units/{name}", name="show_unit")
+     */
+    public function showAction(Unit $unit){
+        $serializer = $this->get('app.entity_serializer');
+        $attributes = $serializer->buildAttributeArray($unit);
+        $faction = $attributes['faction'];
+        $attributes['faction'] = $faction['name'];
+        return $this->render('crud/units/show.html.twig', [
+            'entity' => $unit,
+            'attributes' => $attributes,
         ]);
     }
 
@@ -54,13 +71,14 @@ class AoSUnitsController extends Controller
             return $this->redirectToRoute('list_units');
         }
         return $this->render('crud/units/new.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'twigForm' => $this->twigForm
         ]);
     }
 
     /**
      * @Security("is_granted('ROLE_ADMIN')")
-     * @Route("/crud/units/edit/{name}", name="unit_edit")
+     * @Route("/crud/units/edit/{name}", name="edit_unit")
      */
     public function editAction(Request $request, Unit $unit){
         $form = $this->createForm(AddUnitForm::class, $unit);
@@ -78,16 +96,19 @@ class AoSUnitsController extends Controller
         }
         return $this->render('crud/units/edit.html.twig', [
             'form' => $form->createView(),
-            'unit' => $unit
+            'entity' => $unit,
+            'routes' => $this->routes,
+            'twigForm' => $this->twigForm,
+            'entityName' => $this->entityName
         ]);
     }
 
     /**
      * @Security("is_granted('ROLE_ADMIN')")
-     * @Route("/crud/units/delete/{id}", name="unit_delete")
+     * @Route("/crud/units/delete/{id}", name="delete_unit")
      *
      */
-    public function removeUnitAction($id){
+    public function deleteAction($id){
         $em = $this->getDoctrine()->getManager();
 
         $unit = $em->getRepository('AppBundle:Unit')->find($id);
@@ -96,12 +117,19 @@ class AoSUnitsController extends Controller
         return $this->redirectToRoute('list_units');
     }
 
-    /**
-     * @Route("crud/units/{name}", name="show_unit")
-     */
-    public function showAction(Unit $unit){
-        return $this->render('crud/units/show.html.twig', [
-            'unit' => $unit
-        ]);
+
+    function setRoutes()
+    {
+        $this->routes = [
+            'edit'   => 'edit_unit',
+            'list'   => 'list_units',
+            'new'    => 'add_units',
+            'show'   => 'show_unit',
+            'delete' => 'delete_unit'
+        ];
+
+        $this->twigForm = 'crud/units/_unitsForm.html.twig';
+        $this->entityName = 'Unit';
     }
+
 }

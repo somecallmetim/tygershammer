@@ -17,7 +17,7 @@ AppBundle\Entity\Unit:
 
 AppBundle\Entity\Weapon:
     weapon_{1..10}:
-        weaponName: Weapon <current()>
+        name: Weapon <current()>
         minRange: 0
         maxRange: <numberBetween(1, 45)>
         attacks: <numberBetween(1, 6)>

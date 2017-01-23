@@ -1,17 +1,4 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-    <div class="container">
-        {{ form_start(form) }}
-            {{ include('crud/weapons/_weaponForm.html.twig') }}
-
-        <a href="{{ path('weapon_remove', {'id': weapon.id}) }}" class="btn btn-danger">Delete Weapon</a>
-        <button type="submit" class="btn btn-primary" formnovalidate>
-            Submit Changes
-        </button>
-        {{ form_end(form) }}
-    </div>
-{% endblock %}
+{% extends ':crud:_editTemplate.html.twig' %}
 
 {% block javascripts %}
     {{ parent() }}
