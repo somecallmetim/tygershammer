@@ -75,7 +75,9 @@ class AoSUnitsController extends AbstractCRUDController
             $em->persist($unit);
             $em->flush();
 
-            return $this->redirectToRoute('list_units');
+            $redirectRoute = $form->get('saveAndAdd')->isClicked() ? 'add_units':'list_units';
+
+            return $this->redirectToRoute($redirectRoute);
         }
         return $this->render('crud/units/new.html.twig', [
             'form' => $form->createView(),

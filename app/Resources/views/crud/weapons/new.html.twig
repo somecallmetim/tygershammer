@@ -1,16 +1,4 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-    <div class="container">
-        {{ form_start(form) }}
-            {{ include('crud/weapons/_weaponForm.html.twig') }}
-
-            <button type="submit" class="btn btn-primary" formnovalidate>
-                Submit
-            </button>
-        {{ form_end(form) }}
-    </div>
-{% endblock %}
+{% extends 'crud/_newTemplate.html.twig' %}
 
 {% block javascripts %}
     {{ parent() }}

@@ -76,7 +76,9 @@ class WeaponsController extends AbstractCRUDController
         if($form->isSubmitted() && $form->isValid()){
             $this->persistWeapon($form);
 
-            return $this->redirectToRoute('list_weapons');
+            $redirectRoute = $form->get('saveAndAdd')->isClicked() ? 'add_weapon':'list_weapons';
+
+            return $this->redirectToRoute($redirectRoute);
         }
 
         return $this->render('crud/weapons/new.html.twig', [

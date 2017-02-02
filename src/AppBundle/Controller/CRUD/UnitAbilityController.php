@@ -77,7 +77,9 @@ class UnitAbilityController extends AbstractCRUDController
             $em->persist($unitAbility);
             $em->flush();
 
-            return $this->redirectToRoute('list_unitAbilities');
+            $redirectRoute = $form->get('saveAndAdd')->isClicked() ? 'add_unitAbilities':'list_unitAbilities';
+
+            return $this->redirectToRoute($redirectRoute);
         }
         return $this->render('crud/unitAbilities/new.html.twig', [
             'form' => $form->createView(),

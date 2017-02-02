@@ -15,4 +15,12 @@ class MainController extends Controller
     {
         return $this->render('main/homepage.html.twig');
     }
+
+    /**
+     * @Route("/underConstruction", name="under_construction")
+     */
+    public function underConstructionAction()
+    {
+        return $this->render('underConstruction.html.twig');
+    }
 }

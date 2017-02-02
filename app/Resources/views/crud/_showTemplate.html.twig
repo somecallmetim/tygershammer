@@ -6,7 +6,11 @@
             <h2 class="text-center">{{ entity.name }}
                 {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path(routes['edit'], {'name': entity.name}) }}" class="btn btn-xs btn-success">
-                    <span class="fa fa-pencil"></span></a>
+                        <span class="fa fa-pencil"></span>
+                    </a>
+                    <a href="{{ path(routes['delete'], {'id': entity.id}) }}" class="btn btn-xs btn-danger">
+                        <span class="fa fa-close"></span>
+                    </a>
                 {% endif %}
             </h2>
 

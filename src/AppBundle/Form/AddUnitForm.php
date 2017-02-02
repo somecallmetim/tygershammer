@@ -14,11 +14,10 @@ use AppBundle\Repository\FactionRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use AppBundle\Entity\Unit;
 
 class AddUnitForm extends AbstractType
 {
@@ -58,6 +57,12 @@ class AddUnitForm extends AbstractType
                     return $repo->createAlphabeticalQueryBuilder();
                 }
             ])
+            ->add('saveAndAdd', SubmitType::class, array(
+                'label' => 'Save and Add'
+            ))
+            ->add('save', SubmitType::class, array(
+                'label' => 'Save'
+            ))
         ;
     }
 

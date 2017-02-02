@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,7 +15,14 @@ class AddUnitAbilityForm extends AbstractType
         $builder
             ->add('name')
             ->add('description', TextareaType::class)
-            ->add('commandAbility');
+            ->add('commandAbility')
+            ->add('saveAndAdd', SubmitType::class, array(
+                'label' => 'Save and Add'
+            ))
+            ->add('save', SubmitType::class, array(
+                'label' => 'Save'
+            ))
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
