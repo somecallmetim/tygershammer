@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Add {{ entityName }}</h1>
+                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                {{ include(twigForm) }}
+
+                <div style="margin-bottom: 10px">
+                    {{ form_label(form.saveAndAdd) }}
+                    {{ form_widget(form.saveAndAdd, { 'attr': {'class': 'btn-primary'} }) }}
+                    {{ form_label(form.save) }}
+                    {{ form_widget(form.save, { 'attr': {'class': 'btn-info'} }) }}
+
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

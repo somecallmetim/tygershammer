@@ -1,0 +1,26 @@
+{{ form_row(form.name) }}
+{{ form_row(form.minRange) }}
+{{ form_row(form.maxRange) }}
+{{ form_row(form.weaponType) }}
+{{ form_row(form.attacks) }}
+{{ form_row(form.toHit) }}
+{{ form_row(form.toWound) }}
+{{ form_row(form.dmgDeterminer, {
+    'attr': {'class': "js-dmg-determiner"}
+    })
+}}
+
+<div class="js-dice-dmg-field">
+    {{ form_row(form.maxDieDmgValue, {
+        'attr': {'class': "js-max-die-value"}
+    }) }}
+    {{ form_row(form.numberOfDmgDice, {
+        'attr': {'class': 'js-number-of-dice'}
+    }) }}
+</div>
+
+<div class="js-static-dmg-field">
+    {{ form_row(form.staticDmg, {
+        'attr': {'class': 'js-static-dmg'}
+    }) }}
+</div>

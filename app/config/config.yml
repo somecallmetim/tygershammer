@@ -18,7 +18,9 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
-    #serializer:      { enable_annotations: true }
+    serializer:
+        enabled: true
+        enable_annotations: true
     templating:
         engines: ['twig']
     default_locale:  "%locale%"
@@ -49,6 +51,8 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
+        mapping_types:
+            enum: string
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
         #     e.g. database_path: "%kernel.root_dir%/data/data.db3"

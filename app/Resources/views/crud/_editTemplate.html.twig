@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Edit {{ entityName }}</h1>
+
+                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                {{ include(twigForm) }}
+
+                <a href="{{ path(routes['delete'], {'id': entity.id}) }}" class="btn btn-danger">Delete {{ entityName }}</a>
+                <button type="submit" class="btn btn-primary" formnovalidate>
+                    Submit Changes
+                </button>
+                {% do form.saveAndAdd.setRendered %}
+                {% do form.save.setRendered %}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

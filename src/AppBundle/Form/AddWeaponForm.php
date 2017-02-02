@@ -1,26 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: timbauer
- * Date: 12/17/16
- * Time: 1:47 AM
- */
 
 namespace AppBundle\Form;
 
-
-use AppBundle\Entity\Faction;
-use AppBundle\Repository\FactionRepository;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use AppBundle\Entity\WeaponsEntity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AddUnitForm extends AbstractType
+class AddWeaponForm extends AbstractType
 {
+
     private $choiceValues = [
         'placeholder' => 'Please Select A Value',
         'choices' => [
@@ -42,34 +33,46 @@ class AddUnitForm extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('minNumOfModels')
-            ->add('maxNumOfModels')
-            ->add('points')
-            ->add('saveValue', ChoiceType::class, $this->choiceValues)
-            ->add('braveryValue', ChoiceType::class, $this->choiceValues)
-            ->add('numOfWounds', ChoiceType::class, $this->choiceValues)
-            ->add('spellsPerRound')
-            ->add('description', TextareaType::class)
-            ->add('faction', EntityType::class, [
-                'placeholder' => 'Choose a Faction',
-                'class' => Faction::class,
-                'query_builder' => function(FactionRepository $repo) {
-                    return $repo->createAlphabeticalQueryBuilder();
-                }
+            ->add('minRange')
+            ->add('maxRange')
+            ->add('weaponType', ChoiceType::class, [
+                'choices' => [
+                    'melee' => 'melee',
+                    'ranged' => 'ranged'
+                ]
             ])
+            ->add('attacks', ChoiceType::class, $this->choiceValues)
+            ->add('toHit', ChoiceType::class, $this->choiceValues)
+            ->add('toWound', ChoiceType::class, $this->choiceValues)
+            ->add('dmgDeterminer', ChoiceType::class, [
+                'choices' => [
+                    'dice' => 'dice',
+                    'static value' => 'static'
+                ]
+            ])
+            ->add('maxDieDmgValue', ChoiceType::class, [
+                'choices' => [
+                    'Please select a value' => null,
+                    '3' => 3,
+                    '6' => 6
+                ]
+            ])
+            ->add('numberOfDmgDice')
+            ->add('staticDmg')
             ->add('saveAndAdd', SubmitType::class, array(
                 'label' => 'Save and Add'
             ))
             ->add('save', SubmitType::class, array(
                 'label' => 'Save'
             ))
-        ;
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'AppBundle\Entity\Unit'
+            'data_class' => 'AppBundle\Entity\Weapon'
         ]);
     }
+
 }

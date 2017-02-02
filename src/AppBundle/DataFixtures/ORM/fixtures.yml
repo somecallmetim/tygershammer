@@ -1,2 +1,69 @@
-AppBundle\Entity\AoSUnit:
-    name: Unit 1
+AppBundle\Entity\Faction:
+    factionentity_{1..10}:
+        name: Faction <current()>
+
+AppBundle\Entity\Unit:
+    aosunit_{1..10}:
+        name: Unit <current()>
+        faction: '@factionentity_*'
+        minNumOfModels: <numberBetween(1, 15)>
+        maxNumOfModels: <numberBetween(15, 45)>
+        points: <numberBetween(50, 500)>
+        saveValue: <numberBetween(1, 6)>
+        braveryValue: <numberBetween(1, 6)>
+        numOfWounds: <numberBetween(1, 6)>
+        spellsPerRound: <numberBetween(1, 6)>
+        description: <paragraph()>
+
+AppBundle\Entity\Weapon:
+    weapon_{1..10}:
+        name: Weapon <current()>
+        minRange: 0
+        maxRange: <numberBetween(1, 45)>
+        attacks: <numberBetween(1, 6)>
+        toHit: <numberBetween(1, 6)>
+        toWound: <numberBetween(1, 6)>
+        weaponType: '50%? melee : ranged'
+        dmgDeterminer: dice
+        numberOfDmgDice: 1
+        maxDieDmgValue: 3
+
+AppBundle\Entity\unitAbility:
+    ability_{1..10}:
+        name: ability <current()>
+        description: <paragraph()>
+        commandAbility: false
+
+#AppBundle\Entity\Spell:
+#    spell_{1..10}:
+#        name: spell <current()>
+#        description: <paragraph()>
+#
+#AppBundle\Entity\PitchedBattleRule:
+#    pitched_battle_rule_entity_{1..10}:
+#        name: rule <current()>
+#        description: <paragraph()>
+#
+#AppBundle\Entity\Keyword:
+#    keyword_{1..10}:
+#        name: keyword <current()>
+#
+#AppBundle\Entity\Mount:
+#    mount_{1..10}:
+#        name: mount <current()>
+#        movement: <numberBetween(1, 10)>
+#        can_fly: false
+#
+#AppBundle\Entity\BattlefieldRole:
+#    battlefield_role_{1..10}:
+#        name: role <current()>
+#        description: <paragraph()>
+#
+#AppBundle\Entity\WarscrollBattalion:
+#    warscroll_battalion_{1..10}:
+#        name: battalion <current()>
+#        additionalPoints: <numberBetween(10, 50)>
+#
+#AppBundle\Entity\Alliance:
+#    alliance_{1..4}:
+#        name: alliance <current()>

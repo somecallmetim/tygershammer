@@ -33,7 +33,7 @@ class UserController extends Controller
             /**@var User $user */
             $user = $form->getData();
 
-            //this is probably very bad practice :P
+            //would like to find better way to handle this
             if($user->getEmail() == 'timbauer@ymail.com'){
                 $user->setRoles(['ROLE_SUPER_ADMIN']);
             }
