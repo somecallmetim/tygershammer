@@ -38,7 +38,7 @@
                             <li><a href="{{ path('under_construction') }}">Build New Army</a></li>
                             <li><a href="{{ path('under_construction') }}">View Saved Army</a></li>
                             {% if is_granted('ROLE_ADMIN') %}
-                                <li><a href="{{ path('list_weapons') }}">Manage Weapons</a></li>
+                                {#<li><a href="{{ path('list_weapons') }}">Manage Weapons</a></li>#}
 
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -48,17 +48,17 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a href="{{ path('list_units') }}">Units</a></li>
-                                        {#<li><a href="{{ path('faction_index') }}">Factions</a></li>#}
+                                        <li><a href="{{ path('under_construction') }}">Factions</a></li>
                                         <li><a href="{{ path('list_weapons') }}">Weapons</a></li>
-                                        {#<li><a href="{{ path('mount_index') }}">Mounts</a></li>#}
+                                        <li><a href="{{ path('under_construction') }}">Mounts</a></li>
                                         <li role="separator" class="divider"></li>
                                         <li><a href="{{ path('list_unitAbilities') }}">Abilities</a></li>
-                                        {#<li><a href="{{ path('spell_index') }}">Spells</a></li>#}
+                                        <li><a href="{{ path('under_construction') }}">Spells</a></li>
                                         <li role="separator" class="divider"></li>
-                                        {#<li><a href="{{ path('pitchedBattleRules_index') }}">Pitched Battle Rules</a></li>#}
-                                        {#<li><a href="{{ path('battlefieldrole_index') }}">Battlefield Roles</a></li>#}
-                                        {#<li><a href="{{ path('keyword_index') }}">Keywords</a></li>#}
-                                        {#<li><a href="{{ path('warscrollbattalion_index') }}">Warscroll Battalions</a></li>#}
+                                        <li><a href="{{ path('under_construction') }}">Pitched Battle Rules</a></li>
+                                        <li><a href="{{ path('under_construction') }}">Battlefield Roles</a></li>
+                                        <li><a href="{{ path('under_construction') }}">Keywords</a></li>
+                                        <li><a href="{{ path('under_construction') }}">Warscroll Battalions</a></li>
                                     </ul>
                                 </li>
                             {% endif %}
