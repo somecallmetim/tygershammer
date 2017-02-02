@@ -3,15 +3,27 @@
 {% block body %}
     <div class="container col-xs-offset-1 col-xs-2">
         <ul class="list-group">
-            {% for entity in entities %}
-                <li class="list-group-item">
-                    <a href="{{ path(routes['show'], {'name': entity.name}) }}">{{ entity.name }}</a>
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path(routes['edit'], {'name': entity.name}) }}" class="btn btn-xs btn-success pull-right">
-                            <span class="fa fa-pencil"></span></a>
-                    {% endif %}
-                </li>
-            {% endfor %}
+
+            <table class="table table-bordered table-responsive text-center">
+                <tr>
+                    {% for key in attributes|keys %}
+                        <th class="text-center">{{ key }}</th>
+                    {% endfor %}
+                </tr>
+                {% for entity in entities %}
+                    <tr>
+                        {% for key, value in entity %}
+                            {% if key == 'name' %}
+                                <td><a href="{{ path(routes['show'], {'name': entity.name}) }}">{{ entity.name }}</a></td>
+                            {% elseif key == 'id'%}
+                            {% elseif key == 'description' %}
+                            {% else %}
+                                <td>{{ value }}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
         </ul>
         <form method="link" action="{{ path(routes['new']) }}">
             <button type="submit" class="btn btn-primary"> Add {{ entityName }} </button>

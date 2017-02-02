@@ -33,11 +33,22 @@ class WeaponsController extends AbstractCRUDController
 
         $weapons = $em->getRepository('AppBundle:Weapon')
             ->findAll();
+        
+        $attributes = $this->serialize($weapons[0]);
+        unset($attributes['id']);
+        unset($attributes['description']);
+
+        $weaponsArray = array();
+
+        foreach($weapons as $weapon){
+            $weaponsArray[] = $this->serialize($weapon);
+        }
 
         return $this->render('crud/weapons/list.html.twig', [
-            'entities' => $weapons,
-            'routes' => $this->routes,
-            'entityName' => $this->entityName
+            'entities' => $weaponsArray,
+            'routes'   => $this->routes,
+            'entityName' => $this->entityName,
+            'attributes' => $attributes
         ]);
     }
 
@@ -49,7 +60,8 @@ class WeaponsController extends AbstractCRUDController
         $attributes = $serializer->buildAttributeArray($weapon);
         return $this->render('crud/weapons/show.html.twig', [
             'entity' => $weapon,
-            'attributes' => $attributes
+            'attributes' => $attributes,
+            'routes' => $this->routes
         ]);
     }
 
@@ -68,7 +80,9 @@ class WeaponsController extends AbstractCRUDController
         }
 
         return $this->render('crud/weapons/new.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'twigForm' => $this->twigForm,
+            'entityName' => $this->entityName
             ]);
     }
 
@@ -129,5 +143,12 @@ class WeaponsController extends AbstractCRUDController
 
         $this->twigForm = 'crud/weapons/_weaponForm.html.twig';
         $this->entityName = 'Weapon';
+    }
+
+    function serialize(Weapon $weapon){
+        $serializer = $this->get('app.entity_serializer');
+        $attributes = $serializer->buildAttributeArray($weapon);
+
+        return $attributes;
     }
 }

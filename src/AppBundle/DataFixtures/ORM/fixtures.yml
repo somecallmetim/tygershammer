@@ -28,12 +28,12 @@ AppBundle\Entity\Weapon:
         numberOfDmgDice: 1
         maxDieDmgValue: 3
 
-#AppBundle\Entity\Ability:
-#    ability_{1..10}:
-#        name: ability <current()>
-#        description: <paragraph()>
-#        commandAbility: false
-#
+AppBundle\Entity\unitAbility:
+    ability_{1..10}:
+        name: ability <current()>
+        description: <paragraph()>
+        commandAbility: false
+
 #AppBundle\Entity\Spell:
 #    spell_{1..10}:
 #        name: spell <current()>

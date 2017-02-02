@@ -12,10 +12,8 @@ namespace AppBundle\Controller\CRUD;
 use AppBundle\Controller\AbstractCRUDController;
 use AppBundle\Entity\Unit;
 use AppBundle\Form\AddUnitForm;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class AoSUnitsController extends AbstractCRUDController
@@ -29,10 +27,21 @@ class AoSUnitsController extends AbstractCRUDController
         $units = $em->getRepository('AppBundle:Unit')
             ->findAll();
 
+        $attributes = $this->serialize($units[0]);
+        unset($attributes['id']);
+        unset($attributes['description']);
+
+        $unitsArray = array();
+
+        foreach($units as $unit){
+            $unitsArray[] = $this->serialize($unit);
+        }
+
         return $this->render('crud/units/list.html.twig', [
-            'entities' => $units,
+            'entities' => $unitsArray,
             'routes'   => $this->routes,
-            'entityName' => $this->entityName
+            'entityName' => $this->entityName,
+            'attributes' => $attributes
         ]);
     }
 
@@ -40,13 +49,11 @@ class AoSUnitsController extends AbstractCRUDController
      * @Route("crud/units/{name}", name="show_unit")
      */
     public function showAction(Unit $unit){
-        $serializer = $this->get('app.entity_serializer');
-        $attributes = $serializer->buildAttributeArray($unit);
-        $faction = $attributes['faction'];
-        $attributes['faction'] = $faction['name'];
+        $attributes = $this->serialize($unit);
         return $this->render('crud/units/show.html.twig', [
             'entity' => $unit,
             'attributes' => $attributes,
+            'routes' => $this->routes
         ]);
     }
 
@@ -72,7 +79,8 @@ class AoSUnitsController extends AbstractCRUDController
         }
         return $this->render('crud/units/new.html.twig', [
             'form' => $form->createView(),
-            'twigForm' => $this->twigForm
+            'twigForm' => $this->twigForm,
+            'entityName' => $this->entityName
         ]);
     }
 
@@ -132,4 +140,11 @@ class AoSUnitsController extends AbstractCRUDController
         $this->entityName = 'Unit';
     }
 
+    function serialize(Unit $unit){
+        $serializer = $this->get('app.entity_serializer');
+        $attributes = $serializer->buildAttributeArray($unit);
+        $faction = $attributes['faction'];
+        $attributes['faction'] = $faction['name'];
+        return $attributes;
+    }
 }

@@ -3,7 +3,12 @@
 {% block body %}
     <div class="container">
         <div class="container unit-table-container">
-            <h2 class="text-center">{{ entity.name }}</h2>
+            <h2 class="text-center">{{ entity.name }}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path(routes['edit'], {'name': entity.name}) }}" class="btn btn-xs btn-success">
+                    <span class="fa fa-pencil"></span></a>
+                {% endif %}
+            </h2>
 
             <table class="table table-bordered table-responsive text-center">
                 <tr>
