@@ -76,8 +76,11 @@ class WeaponsController extends AbstractCRUDController
         if($form->isSubmitted() && $form->isValid()){
             $this->persistWeapon($form);
 
+            $weapon = $form->getData();
+
             $redirectRoute = $form->get('saveAndAdd')->isClicked() ? 'add_weapon':'list_weapons';
 
+            $this->addFlash('success', sprintf('%s successfully created!', $weapon->getName()));
             return $this->redirectToRoute($redirectRoute);
         }
 
@@ -99,6 +102,9 @@ class WeaponsController extends AbstractCRUDController
         if($form->isSubmitted() && $form->isValid()){
             $this->persistWeapon($form);
 
+            $weapon = $form->getData();
+
+            $this->addFlash('success', sprintf('%s successfully updated!', $weapon->getName()));
             return $this->redirectToRoute('list_weapons');
         }
 
@@ -117,7 +123,7 @@ class WeaponsController extends AbstractCRUDController
     public function removeAction($id){
         $em = $this->getDoctrine()->getManager();
 
-        $weapon = $em->getRepository('Weapon.php')->find($id);
+        $weapon = $em->getRepository('AppBundle:Weapon')->find($id);
 
         $em->remove($weapon);
         $em->flush();

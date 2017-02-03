@@ -75,6 +75,8 @@ class AoSUnitsController extends AbstractCRUDController
             $em->persist($unit);
             $em->flush();
 
+            $this->addFlash('success', sprintf('%s successfully created!', $unit->getName()));
+
             $redirectRoute = $form->get('saveAndAdd')->isClicked() ? 'add_units':'list_units';
 
             return $this->redirectToRoute($redirectRoute);
@@ -101,6 +103,8 @@ class AoSUnitsController extends AbstractCRUDController
 
             $em->persist($unit);
             $em->flush();
+
+            $this->addFlash('success', sprintf('%s successfully updated!', $unit->getName()));
 
             return $this->redirectToRoute('list_units');
         }
