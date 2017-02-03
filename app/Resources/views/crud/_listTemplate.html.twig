@@ -4,25 +4,30 @@
     <div class="container col-xs-offset-1 col-xs-2">
         <ul class="list-group">
 
-            <table class="table table-bordered table-responsive text-center">
-                <tr>
-                    {% for key in attributes|keys %}
-                        <th class="text-center">{{ key }}</th>
-                    {% endfor %}
-                </tr>
-                {% for entity in entities %}
+            <table id="DbTable" class="table tablesorter table-bordered table-responsive text-center">
+            {#<table id="DbTable" class="tablesorter">#}
+                <thead>
                     <tr>
-                        {% for key, value in entity %}
-                            {% if key == 'name' %}
-                                <td><a href="{{ path(routes['show'], {'name': entity.name}) }}">{{ entity.name }}</a></td>
-                            {% elseif key == 'id'%}
-                            {% elseif key == 'description' %}
-                            {% else %}
-                                <td>{{ value }}</td>
-                            {% endif %}
+                        {% for key in attributes|keys %}
+                            <th class="text-center">{{ key }} <span class="fa fa-sort"></span> </th>
                         {% endfor %}
                     </tr>
-                {% endfor %}
+                </thead>
+                <tbody>
+                    {% for entity in entities %}
+                        <tr>
+                            {% for key, value in entity %}
+                                {% if key == 'name' %}
+                                    <td><a href="{{ path(routes['show'], {'name': entity.name}) }}">{{ entity.name }}</a></td>
+                                {% elseif key == 'id'%}
+                                {% elseif key == 'description' %}
+                                {% else %}
+                                    <td>{{ value }}</td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
             </table>
         </ul>
         <form method="link" action="{{ path(routes['new']) }}">
@@ -31,12 +36,8 @@
     </div>
 {% endblock %}
 
-{#{% block stylesheets %}#}
-    {#{{ parent() }}#}
-    {#<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.7/dt-1.10.13/cr-1.3.2/fh-3.1.2/r-2.1.0/rr-1.2.0/sc-1.4.2/datatables.min.css"/>#}
-{#{% endblock %}#}
-
-{#{% block javascripts %}#}
-    {#{{ parent() }}#}
-    {#<script type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.7/dt-1.10.13/cr-1.3.2/fh-3.1.2/r-2.1.0/rr-1.2.0/sc-1.4.2/datatables.min.js"></script>#}
-{#{% endblock %}#}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('tablesorter/js/jquery.tablesorter.js') }}"></script>
+    <script src="{{ asset('js/db.tablesorter.js') }}"></script>
+{% endblock %}
