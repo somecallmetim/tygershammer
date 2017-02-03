@@ -3,18 +3,20 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * UnitAbility
  *
  * @ORM\Table(name="unit_ability")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UnitAbilityRepository")
+ * @UniqueEntity(fields={"name"}, message="This Unit already exists")
  */
 class UnitAbility
 {
     /**
      * @var int
-     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -23,8 +25,8 @@ class UnitAbility
 
     /**
      * @var string
-     *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -32,6 +34,7 @@ class UnitAbility
      * @var string
      *
      * @ORM\Column(name="description", type="text")
+     * @Assert\NotBlank()
      */
     private $description;
 

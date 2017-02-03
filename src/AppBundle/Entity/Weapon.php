@@ -27,35 +27,43 @@ class Weapon
     private $id;
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     private $name;
     /**
      * @ORM\Column(type="smallint")
+     * @Assert\NotBlank()
      */
     private $minRange = 0;
     /**
      * @ORM\Column(type="smallint")
+     * @Assert\NotBlank()
      */
     private $maxRange;
     /**
      * @ORM\Column(type="smallint")
+     * @Assert\NotBlank()
      */
     private $attacks = 1;
     /**
      * @ORM\Column(type="smallint")
+     * @Assert\NotBlank()
      */
     private $toHit;
     /**
      * @ORM\Column(type="smallint")
+     * @Assert\NotBlank()
      */
     private $toWound;
     /**
      * @ORM\Column(type="string", columnDefinition="enum('melee', 'ranged')")
+     * @Assert\NotBlank()
      */
     private $weaponType;
 
     /**
      * @ORM\Column(type="string", columnDefinition="enum('dice', 'static')")
+     * @Assert\NotBlank()
      */
     private $dmgDeterminer;
 

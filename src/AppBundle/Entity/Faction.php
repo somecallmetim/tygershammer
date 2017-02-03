@@ -10,10 +10,13 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\FactionRepository")
  * @ORM\Table(name="faction")
+ * @UniqueEntity(fields={"name"}, message="This Faction already exists")
  */
 class Faction
 {
@@ -26,6 +29,7 @@ class Faction
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     private $name;
 
