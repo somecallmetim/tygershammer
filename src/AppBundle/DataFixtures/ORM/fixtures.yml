@@ -38,12 +38,12 @@ AppBundle\Entity\unitAbility:
 #    spell_{1..10}:
 #        name: spell <current()>
 #        description: <paragraph()>
-#
-#AppBundle\Entity\PitchedBattleRule:
-#    pitched_battle_rule_entity_{1..10}:
-#        name: rule <current()>
-#        description: <paragraph()>
-#
+
+AppBundle\Entity\PitchedBattleRule:
+    pitched_battle_rule_entity_{1..10}:
+        name: rule <current()>
+        description: <paragraph()>
+
 #AppBundle\Entity\Keyword:
 #    keyword_{1..10}:
 #        name: keyword <current()>
