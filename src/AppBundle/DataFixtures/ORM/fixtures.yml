@@ -34,19 +34,19 @@ AppBundle\Entity\unitAbility:
         description: <paragraph()>
         commandAbility: false
 
-#AppBundle\Entity\Spell:
-#    spell_{1..10}:
-#        name: spell <current()>
-#        description: <paragraph()>
+AppBundle\Entity\Spell:
+    spell_{1..10}:
+        name: spell <current()>
+        description: <paragraph()>
 
 AppBundle\Entity\PitchedBattleRule:
     pitched_battle_rule_entity_{1..10}:
         name: rule <current()>
         description: <paragraph()>
 
-#AppBundle\Entity\Keyword:
-#    keyword_{1..10}:
-#        name: keyword <current()>
+AppBundle\Entity\Keyword:
+    keyword_{1..10}:
+        name: keyword <current()>
 
 AppBundle\Entity\Mount:
     mount_{1..10}:
@@ -54,16 +54,16 @@ AppBundle\Entity\Mount:
         movement: <numberBetween(1, 10)>
         can_fly: '50%? 1 : 0'
 
-#AppBundle\Entity\BattlefieldRole:
-#    battlefield_role_{1..10}:
-#        name: role <current()>
-#        description: <paragraph()>
-#
-#AppBundle\Entity\WarscrollBattalion:
-#    warscroll_battalion_{1..10}:
-#        name: battalion <current()>
-#        additionalPoints: <numberBetween(10, 50)>
-#
-#AppBundle\Entity\Alliance:
-#    alliance_{1..4}:
-#        name: alliance <current()>
+AppBundle\Entity\BattlefieldRole:
+    battlefield_role_{1..10}:
+        name: role <current()>
+        description: <paragraph()>
+
+AppBundle\Entity\WarscrollBattalion:
+    warscroll_battalion_{1..10}:
+        name: battalion <current()>
+        additionalPointCost: <numberBetween(10, 50)>
+
+AppBundle\Entity\Alliance:
+    alliance_{1..4}:
+        name: alliance <current()>
