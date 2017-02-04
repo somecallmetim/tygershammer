@@ -47,13 +47,13 @@ AppBundle\Entity\unitAbility:
 #AppBundle\Entity\Keyword:
 #    keyword_{1..10}:
 #        name: keyword <current()>
-#
-#AppBundle\Entity\Mount:
-#    mount_{1..10}:
-#        name: mount <current()>
-#        movement: <numberBetween(1, 10)>
-#        can_fly: false
-#
+
+AppBundle\Entity\Mount:
+    mount_{1..10}:
+        name: mount <current()>
+        movement: <numberBetween(1, 10)>
+        can_fly: '50%? 1 : 0'
+
 #AppBundle\Entity\BattlefieldRole:
 #    battlefield_role_{1..10}:
 #        name: role <current()>
