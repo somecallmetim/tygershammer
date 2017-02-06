@@ -34,6 +34,11 @@ class Faction
     private $name;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Unit", mappedBy="faction")
+     */
+    private $units;
+
+    /**
      * @return mixed
      */
     public function getId()

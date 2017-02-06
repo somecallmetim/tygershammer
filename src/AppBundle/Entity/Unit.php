@@ -35,7 +35,7 @@ class Unit
     protected $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Faction")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Faction", inversedBy="units")
      * @ORM\JoinColumn(nullable=false)
      */
     protected $faction;
