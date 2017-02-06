@@ -95,7 +95,7 @@ class Unit
         return $this->faction;
     }
 
-    public function setFaction($faction)
+    public function setFaction(Faction $faction)
     {
         $this->faction = $faction;
     }
