@@ -9,6 +9,7 @@
 namespace AppBundle\Entity;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -37,6 +38,11 @@ class Faction
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Unit", mappedBy="faction")
      */
     private $units;
+
+    public function __construct()
+    {
+        $this->units = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -69,6 +75,24 @@ class Faction
     {
         $this->name = $name;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUnits()
+    {
+        return $this->units;
+    }
+
+    /**
+     * @param mixed $units
+     */
+    public function setUnits($units)
+    {
+        $this->units = $units;
+    }
+
+
 
     function __toString()
     {
