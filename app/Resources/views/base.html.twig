@@ -22,7 +22,7 @@
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-collapseable-navbar" aria-expanded="false">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -32,17 +32,17 @@
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <div class="collapse navbar-collapse" id="main-collapseable-navbar">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="{{ path('homepage') }}">Home<span class="sr-only">(current)</span></a></li>
-                            <li><a href="{{ path('list_units') }}">View Units</a></li>
-                            <li><a href="{{ path('under_construction') }}">Build New Army</a></li>
-                            <li><a href="{{ path('under_construction') }}">View Saved Army</a></li>
+                            <li class="active"><a id="home-navbar-link" href="{{ path('homepage') }}">Home<span class="sr-only">(current)</span></a></li>
+                            <li><a id="units-navbar-link" href="{{ path('list_units') }}">View Units</a></li>
+                            <li><a id="build-army-navbar-link" href="{{ path('under_construction') }}">Build New Army</a></li>
+                            <li><a id="view-army-navbar-link" href="{{ path('under_construction') }}">View Saved Army</a></li>
                             {% if is_granted('ROLE_ADMIN') %}
                                 {#<li><a href="{{ path('list_weapons') }}">Manage Weapons</a></li>#}
 
                                 <li class="dropdown">
-                                    <a href="#" id="testid" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                    <a href="#" id="manage-entities-navbar-link" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                        aria-haspopup="true" aria-expanded="false">
                                             Manage Entities
                                             <span class="caret"></span>
@@ -65,7 +65,7 @@
                                 </li>
                             {% endif %}
                             {% if is_granted('ROLE_SUPER_ADMIN') %}
-                                <li><a href="{{ path('under_construction') }}">Manage Users</a></li>
+                                <li><a id="manage-users-navbar-link" href="{{ path('under_construction') }}">Manage Users</a></li>
                             {% endif %}
                         </ul>
 
@@ -105,6 +105,21 @@
             <script src={{ asset('js/jquery-3.1.1.min.js') }}></script>
             <script src= {{ asset('js/bootstrap.min.js') }}></script>
             <script src={{ asset('js/carousel.js') }}></script>
+            <script>
+                $(document).ready(function() {
+                    $('.collapse li a').click(function(e) {
+                        var $this = $(this);
+                        if (!$this.hasClass('active')) {
+                            $this.parent().siblings().removeClass('active');
+                            $this.parent().addClass('active');
+                        }
+                    });
+                    $(function () {
+                        $('[data-toggle="popover"]').popover()
+                    })
+                } );
+
+            </script>
         {% endblock %}
 
 </html>

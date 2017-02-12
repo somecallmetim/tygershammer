@@ -21,7 +21,7 @@ class AoSUnitsController extends AbstractCRUDController
     /**
      * @Route("/units", name="list_units")
      */
-    public function listAction(){
+    public function listAction(Request $request){
         $em = $this->getDoctrine()->getManager();
 
         $units = $em->getRepository('AppBundle:Unit')
@@ -32,6 +32,7 @@ class AoSUnitsController extends AbstractCRUDController
         unset($attributes['description']);
 
         $unitsArray = array();
+
 
         foreach($units as $unit){
             $unitsArray[] = $this->serialize($unit);

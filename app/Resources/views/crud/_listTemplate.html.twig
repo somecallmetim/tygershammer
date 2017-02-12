@@ -1,3 +1,5 @@
+{#Special thanks to Rob Garrison at https://github.com/mottie/tablesorter/#}
+
 {% extends'base.html.twig' %}
 
 {% block body %}
@@ -5,11 +7,13 @@
         <ul class="list-group">
 
             <table id="DbTable" class="table tablesorter table-bordered table-responsive text-center">
-            {#<table id="DbTable" class="tablesorter">#}
                 <thead>
                     <tr>
-                        {% for key in attributes|keys %}
-                            <th class="text-center">{{ key }} <span class="fa fa-sort"></span> </th>
+                        {% for key, value in attributes %}
+                            {# gets rid of array type values #}
+                            {% if not value is iterable %}
+                                <th class="text-center">{{ key }} <span class="fa fa-sort"></span> </th>
+                            {% endif %}
                         {% endfor %}
                     </tr>
                 </thead>
@@ -21,7 +25,9 @@
                                     <td><a href="{{ path(routes['show'], {'name': entity.name}) }}">{{ entity.name }}</a></td>
                                 {% elseif key == 'id'%}
                                 {% elseif key == 'description' %}
-                                {% else %}
+
+                                {# gets rid of array type values #}
+                                {% elseif not value is iterable %}
                                     <td>{{ value }}</td>
                                 {% endif %}
                             {% endfor %}
@@ -40,4 +46,17 @@
     {{ parent() }}
     <script src="{{ asset('tablesorter/js/jquery.tablesorter.js') }}"></script>
     <script src="{{ asset('js/db.tablesorter.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            var pageName = {{ entityName|json_encode|raw }};
+            var targetLink;
+            if( pageName.includes("Unit")){
+                targetLink = '#units-navbar-link'
+            }else {
+                targetLink = '#manage-entities-navbar-link'
+            }
+            $(targetLink).parent().addClass('active');
+            $(targetLink).parent().siblings().removeClass('active');
+        } );
+    </script>
 {% endblock %}

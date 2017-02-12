@@ -10,3 +10,14 @@
         </div>
     </div>
 {% endblock %}
+
+{% block javascripts %}
+    <script>
+        {{ parent() }}
+        $(document).ready(function() {
+            var targetLink = "home-navbar-link";
+            $(targetLink).parent().removeClass('active');
+            $(targetLink).parent().siblings().removeClass('active');
+        } );
+    </script>
+{% endblock %}
