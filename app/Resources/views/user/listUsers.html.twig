@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+
+        <table class="table table-responsive">
+            <thead>
+            <tr>
+                <th></th>
+                <th>User Name</th>
+                <th>Email Address</th>
+                <th>User Role</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            {% for user in users %}
+                {% if user.roles|length > 1 %}
+                    <tr>
+                        <td><a href="{{ path('delete_user', {'id': user.id}) }}"><span class="fa fa-close" style="color: red"></span></a></td>
+                        <td><a href="#">{{ user.username }}</a></td>
+                        <td><a href="#">{{ user.email }}</a></td>
+                        <td>Admin</td>
+                        <td><a href="{{ path('demote_user', {'id': user.id}) }}">
+                                <span class="fa fa-hand-o-down"></span> demote </a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td><a href="{{ path('delete_user', {'id': user.id}) }}"><span class="fa fa-close" style="color: red"></span></a></td>
+                        <td><a href="#">{{ user.username }}</a></td>
+                        <td><a href="#">{{ user.email }}</a></td>
+                        <td>User</td>
+                        <td><a href="{{ path('promote_user', {'id': user.id}) }}"><span class="fa fa-hand-o-up"></span> promote </a></td>
+                    </tr>
+                {% endif %}
+
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+

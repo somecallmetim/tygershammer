@@ -31,6 +31,12 @@ class User implements UserInterface
 
     /**
      * @Assert\NotBlank()
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $username;
+
+    /**
+     * @Assert\NotBlank()
      * @Assert\Email()
      * @ORM\Column(type="string", unique=true)
      */
@@ -49,12 +55,24 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="json_array")
      */
-    private $roles = [];
+    private $roles = ['ROLE_USER'];
 
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
 
     public function getUsername()
     {
-        return $this->email;
+        return $this->username;
     }
 
     public function getRoles()
@@ -122,5 +140,21 @@ class User implements UserInterface
         $this->password = null;
     }
 
+    public function addOneRole($role)
+    {
+        if(!in_array('ROLE_USER', $this->roles)){
+            //this adds ROLE_USER to the array, it does NOT overwrite the array
+            $roles[] = 'ROLE_USER';
+        }
+        $this->roles[] = $role;
+    }
 
+    public function removeOneRole($role)
+    {
+        unset($this->roles[array_search($role, $this->roles)]);
+        if(!in_array('ROLE_USER', $this->roles)){
+            //this adds ROLE_USER to the array, it does NOT overwrite the array
+            $roles[] = 'ROLE_USER';
+        }
+    }
 }

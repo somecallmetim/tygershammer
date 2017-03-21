@@ -60,7 +60,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         //$credentials == $data from the above 'getCredentials' function
         $username = $credentials['_username'];
 
-        return $this->em->getRepository('AppBundle:User')->findOneBy(['email' => $username]);
+        if($user = $this->em->getRepository('AppBundle:User')->findOneBy(['username' => $username])){
+            return $user;
+        }else{
+            return $this->em->getRepository('AppBundle:User')->findOneBy(['email' => $username]);
+        }
     }
 
     //SymfonyGuard calls this function directly after the above 'getUser' function
