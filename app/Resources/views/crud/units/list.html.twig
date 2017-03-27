@@ -1,4 +1,4 @@
-{% extends'crud/_listTemplate.html.twig' %}
+{% extends'base.html.twig' %}
 
 {% block body %}
     <div class="container">
@@ -18,19 +18,20 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="unit-stat-display-navbar">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Base Stats<span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">Unit Info</a></li>
-                        <li><a href="#">Abilities and Spells</a></li>
-                        <li><a href="#">Special Rules</a></li>
+                        <li id="baseStatSelector" class="active"><a href="#">Base Stats<span class="sr-only">(current)</span></a></li>
+                        <li id="unitInfoSelector"><a href="#">Unit Info</a></li>
+                        <li id="spellOrAbilitySelector"><a href="#">Abilities and Spells</a></li>
+                        <li id="specialRuleSelector"><a href="#">Special Rules</a></li>
 
                         <li class="dropdown">
                             <a id="selectedCategory" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">Choose Alliance <span class="caret"></span></a>
-                            <ul id="js-alliance-dropdown" class="dropdown-menu">
-                                <li><a href="#">Order</a></li>
-                                <li><a href="#">Chaos</a></li>
-                                <li><a href="#">Death</a></li>
-                                <li><a href="#">Destruction</a></li>
+                            <ul id="js-alliance-dropdown" class="dropdown-menu js-non-selectable">
+                                <li class="js-non-selectable"><a href="#">Order</a></li>
+                                <li class="js-non-selectable"><a href="#">Chaos</a></li>
+                                <li class="js-non-selectable"><a href="#">Death</a></li>
+                                <li class="js-non-selectable"><a href="#">Destruction</a></li>
+                                <li class="js-non-selectable"><a href="#">All</a></li>
                             </ul>
                         </li>
 
@@ -38,10 +39,10 @@
                             <a id="selectedCategory" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">Choose Faction <span class="caret"></span></a>
                             <ul id="js-faction-dropdown" class="dropdown-menu">
-                                <li><a href="#">test</a></li>
-                                <li><a href="#">test 1</a></li>
-                                <li><a href="#">test 2</a></li>
-                                <li><a href="#">test 3</a></li>
+                                <li class="js-non-selectable"><a href="#">test</a></li>
+                                <li class="js-non-selectable"><a href="#">test 1</a></li>
+                                <li class="js-non-selectable"><a href="#">test 2</a></li>
+                                <li class="js-non-selectable"><a href="#">test 3</a></li>
                             </ul>
                         </li>
 
@@ -61,16 +62,95 @@
         </nav>
     </div>
     <br>
-    {{ parent() }}
+
+    <div class="container">
+        <ul class="list-group">
+
+            <table id="DbTable" class="table tablesorter table-bordered table-responsive text-center">
+                <thead>
+                <tr>
+                    <th class="text-center"> name <span class="fa fa-sort"></span> </th>
+
+                    <th class="text-center baseStat"> Save<span class="fa fa-sort"></span> </th>
+                    <th class="text-center baseStat"> Bravery<span class="fa fa-sort"></span> </th>
+                    <th class="text-center baseStat"> Wounds<span class="fa fa-sort"></span> </th>
+                    <th class="text-center baseStat"> Melee Weapons<span class="fa fa-sort"></span></th>
+                    <th class="text-center baseStat"> Ranged Weapons<span class="fa fa-sort"></span></th>
+                    <th class="text-center baseStat"> Movement<span class="fa fa-sort"></span></th>
+                    <th class="text-center baseStat"> Mount<span class="fa fa-sort"></span></th>
+                    <th class="text-center baseStat"> Description</th>
+
+                    <th class="text-center unitInfo" style="display: none"> Faction <span class="fa fa-sort"></span> </th>
+                    <th class="text-center unitInfo" style="display: none"> Alliance <span class="fa fa-sort"></span> </th>
+                    <th class="text-center unitInfo" style="display: none"> Min models <span class="fa fa-sort"></span> </th>
+                    <th class="text-center unitInfo" style="display: none"> Max models <span class="fa fa-sort"></span> </th>
+                    <th class="text-center unitInfo" style="display: none"> Points<span class="fa fa-sort"></span> </th>
+
+                    <th class="text-center spellOrAbility" style="display: none"> Abilities<span class="fa fa-sort"></span> </th>
+                    <th class="text-center spellOrAbility" style="display: none"> Command Abilities<span class="fa fa-sort"></span> </th>
+                    <th class="text-center spellOrAbility" style="display: none"> Spells<span class="fa fa-sort"></span> </th>
+                    <th class="text-center spellOrAbility" style="display: none"> Spells per Round<span class="fa fa-sort"></span> </th>
+
+                    <th class="text-center specialRule" style="display: none"> BattleField Roles <span class="fa fa-sort"></span> </th>
+                    <th class="text-center specialRule" style="display: none"> Pitched Battle Rules <span class="fa fa-sort"></span> </th>
+                    <th class="text-center specialRule" style="display: none"> Unit Specials <span class="fa fa-sort"></span> </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for entity in entities %}
+                    <tr>
+                        <td><a href="{{ path(routes['show'], {'name': entity.name}) }}">{{ entity.name }}</a></td>
+
+                        <td class="baseStat">{{ entity.saveValue }}</td>
+                        <td class="baseStat">{{ entity.braveryValue }}</td>
+                        <td class="baseStat">{{ entity.numOfWounds }}</td>
+                        <td class="baseStat"> ToDo </td>
+                        <td class="baseStat"> ToDo </td>
+                        <td class="baseStat"> ToDo </td>
+                        <td class="baseStat"> ToDo </td>
+                        <td class="baseStat">{{ entity.description }}</td>
+
+                        <td class="unitInfo" style="display: none">{{ entity.faction }}</td>
+                        <td class="unitInfo" style="display: none"> ToDo </td>
+                        <td class="unitInfo" style="display: none">{{ entity.minNumOfModels }}</td>
+                        <td class="unitInfo" style="display: none">{{ entity.maxNumOfModels }}</td>
+                        <td class="unitInfo" style="display: none">{{ entity.points }}</td>
+
+                        <td class="spellOrAbility" style="display: none"> ToDo </td>
+                        <td class="spellOrAbility" style="display: none"> ToDo </td>
+                        <td class="spellOrAbility" style="display: none"> ToDo </td>
+                        <td class="spellOrAbility" style="display: none">{{ entity.spellsPerRound }}</td>
+
+                        <td class="specialRule" style="display: none"> ToDo </td>
+                        <td class="specialRule" style="display: none"> ToDo </td>
+                        <td class="specialRule" style="display: none"> ToDo </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </ul>
+        <form method="link" action="{{ path(routes['new']) }}">
+            <button type="submit" class="btn btn-primary"> Add {{ entityName }} </button>
+        </form>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-
+    <script src="{{ asset('tablesorter/js/jquery.tablesorter.js') }}"></script>
+    <script src="{{ asset('js/db.tablesorter.js') }}"></script>
     <script>
         $(document).ready(function() {
 
-//            $('#js-faction-dropdown').hide();
+            var pageName = {{ entityName|json_encode|raw }};
+            var targetLink;
+            if( pageName.includes("Unit")){
+                targetLink = '#units-navbar-link'
+            }else {
+                targetLink = '#manage-entities-navbar-link'
+            }
+            $(targetLink).parent().addClass('active');
+            $(targetLink).parent().siblings().removeClass('active');
 
             $(".dropdown-menu li a").click(function (e) {
                 $(this).parents(".dropdown").find('.dropdown-toggle').html($(this).text() + ' <span class="caret"></span>');
@@ -82,22 +162,38 @@
                     $('#js-faction-dropdown-menu-li').show();
                 }
             });
+
+            $('#unit-stat-display-navbar li a').click(function (e) {
+                var id;
+
+                if(id = $(this).parent().attr('id')){
+                    switch(id){
+                        case 'baseStatSelector':
+                            $('.baseStat').show();
+                            $('.unitInfo, .spellOrAbility, .specialRule').hide();
+                            break;
+
+                        case 'unitInfoSelector':
+                            $('.unitInfo').show();
+                            $('.baseStat, .spellOrAbility, .specialRule').hide();
+                            break;
+
+                        case 'spellOrAbilitySelector':
+                            $('.spellOrAbility').show();
+                            $('.unitInfo, .baseStat, .specialRule').hide();
+                            break;
+
+                        case 'specialRuleSelector':
+                            $('.specialRule').show();
+                            $('.unitInfo, .spellOrAbility, .baseStat').hide();
+                            break;
+
+                        default:
+
+                    }
+                }
+            });
         });
     </script>
-    {#<script>#}
-        {#$(document).ready(function() {#}
-            {#$('.collapse li a').click(function(e) {#}
-                {#var $this = $(this);#}
-                {#if (!$this.hasClass('active')) {#}
-{#//                    window.alert("got here");#}
-                    {#$this.parent().siblings().removeClass('active');#}
-                    {#$this.parent().addClass('active');#}
-                {#}#}
-            {#});#}
-            {#$(function () {#}
-                {#$('[data-toggle="popover"]').popover()#}
-            {#})#}
-        {#} );#}
 
-    {#</script>#}
 {% endblock %}

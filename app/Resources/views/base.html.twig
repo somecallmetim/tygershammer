@@ -109,7 +109,7 @@
                 $(document).ready(function() {
                     $('.collapse li a').click(function(e) {
                         var $this = $(this);
-                        if (!$this.hasClass('active')) {
+                        if (!$this.hasClass('active') && !$this.parent().hasClass('dropdown')) {
                             $this.parent().siblings().removeClass('active');
                             $this.parent().addClass('active');
                         }
@@ -117,8 +117,7 @@
                     $(function () {
                         $('[data-toggle="popover"]').popover()
                     })
-                } );
-
+                });
             </script>
         {% endblock %}
 
