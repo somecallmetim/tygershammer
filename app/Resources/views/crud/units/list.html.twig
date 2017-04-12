@@ -69,7 +69,8 @@
             <table id="DbTable" class="table tablesorter table-bordered table-responsive text-center">
                 <thead>
                 <tr>
-                    <th class="text-center"> name <span class="fa fa-sort"></span> </th>
+                    <th class="text-center"> Name <span class="fa fa-sort"></span> </th>
+                    <th class="text-center"> Alliance<span class="fa fa-sort"></span> </th>
 
                     <th class="text-center baseStat"> Save<span class="fa fa-sort"></span> </th>
                     <th class="text-center baseStat"> Bravery<span class="fa fa-sort"></span> </th>
@@ -100,6 +101,7 @@
                 {% for entity in entities %}
                     <tr>
                         <td><a href="{{ path(routes['show'], {'name': entity.name}) }}">{{ entity.name }}</a></td>
+                        <td> {{ entity.alliance }} </td>
 
                         <td class="baseStat">{{ entity.saveValue }}</td>
                         <td class="baseStat">{{ entity.braveryValue }}</td>

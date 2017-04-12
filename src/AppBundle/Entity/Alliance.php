@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -31,6 +32,16 @@ class Alliance
      * @Assert\NotBlank()
      */
     private $name;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Faction", mappedBy="alliance")
+     */
+    private $factions;
+
+    public function __construct()
+    {
+        $this->factions = new ArrayCollection();
+    }
 
 
     /**
@@ -66,5 +77,28 @@ class Alliance
     {
         return $this->name;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getFactions()
+    {
+        return $this->factions;
+    }
+
+    /**
+     * @param mixed $factions
+     */
+    public function setFactions($factions)
+    {
+        $this->factions = $factions;
+    }
+
+    function __toString()
+    {
+        return (string)$this->name;
+    }
+
+
 }
 

@@ -1,3 +1,13 @@
+AppBundle\Entity\Alliance:
+    alliance_1:
+        name: Order
+    alliance_2:
+        name: Death
+    alliance_3:
+        name: Chaos
+    alliance_4:
+        name: Destruction
+
 AppBundle\Entity\Faction:
     factionentity_{1..10}:
         name: Faction <current()>
@@ -5,6 +15,7 @@ AppBundle\Entity\Faction:
 AppBundle\Entity\Unit:
     aosunit_{1..10}:
         name: Unit <current()>
+        alliance: '@alliance_*'
         faction: '@factionentity_*'
         minNumOfModels: <numberBetween(1, 15)>
         maxNumOfModels: <numberBetween(15, 45)>
@@ -63,7 +74,3 @@ AppBundle\Entity\WarscrollBattalion:
     warscroll_battalion_{1..10}:
         name: battalion <current()>
         additionalPointCost: <numberBetween(10, 50)>
-
-AppBundle\Entity\Alliance:
-    alliance_{1..4}:
-        name: alliance <current()>

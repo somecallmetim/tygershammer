@@ -35,6 +35,27 @@ class Unit
     protected $name;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    protected $alliance;
+
+    /**
+     * @return mixed
+     */
+    public function getAlliance()
+    {
+        return $this->alliance;
+    }
+
+    /**
+     * @param mixed $alliance
+     */
+    public function setAlliance($alliance)
+    {
+        $this->alliance = $alliance;
+    }
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Faction", inversedBy="units")
      * @ORM\JoinColumn(nullable=false)
      */

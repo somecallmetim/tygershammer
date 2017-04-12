@@ -39,6 +39,11 @@ class Faction
      */
     private $units;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Alliance", inversedBy="factions")
+     */
+    private $alliance;
+
     public function __construct()
     {
         $this->units = new ArrayCollection();
@@ -92,7 +97,21 @@ class Faction
         $this->units = $units;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getAlliance()
+    {
+        return $this->alliance;
+    }
 
+    /**
+     * @param mixed $alliance
+     */
+    public function setAlliance($alliance)
+    {
+        $this->alliance = $alliance;
+    }
 
     function __toString()
     {
