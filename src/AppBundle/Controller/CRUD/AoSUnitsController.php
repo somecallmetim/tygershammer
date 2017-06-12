@@ -28,21 +28,17 @@ class AoSUnitsController extends AbstractCRUDController
             ->findAll();
 
         $attributes = $this->serialize($units[0]);
-        unset($attributes['id']);
-        unset($attributes['description']);
-
         $unitsArray = array();
+        $showFaction = false;
 
-
-        foreach($units as $unit){
-            $unitsArray[] = $this->serialize($unit);
-        }
+        $this->serializeUnits($units, $unitsArray, $attributes);
 
         return $this->render('crud/units/list.html.twig', [
             'entities' => $unitsArray,
             'routes'   => $this->routes,
             'entityName' => $this->entityName,
-            'attributes' => $attributes
+            'attributes' => $attributes,
+            'showFaction' => $showFaction
         ]);
     }
 
@@ -145,6 +141,15 @@ class AoSUnitsController extends AbstractCRUDController
 
         $this->twigForm = 'crud/units/_unitsForm.html.twig';
         $this->entityName = 'Unit';
+    }
+
+    private function serializeUnits(&$units, &$unitsArray, &$attributes){
+        unset($attributes['id']);
+        unset($attributes['description']);
+
+        foreach($units as $unit){
+            $unitsArray[] = $this->serialize($unit);
+        }
     }
 
     function serialize(Unit $unit){
