@@ -27,24 +27,26 @@
                             <a id="selectedCategory" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">Choose Alliance <span class="caret"></span></a>
                             <ul id="js-alliance-dropdown" class="dropdown-menu js-non-selectable">
-                                <li><a href="#">Order</a></li>
-                                <li><a href="#">Chaos</a></li>
-                                <li><a href="#">Death</a></li>
-                                <li><a href="#">Destruction</a></li>
-                                <li><a href="#">All</a></li>
+                                <li><a href="{{ path('list_units_by_alliance_alone', {'alliance' : 'order'}) }}">Order</a></li>
+                                <li><a href="{{ path('list_units_by_alliance_alone', {'alliance' : 'chaos'}) }}">Chaos</a></li>
+                                <li><a href="{{ path('list_units_by_alliance_alone', {'alliance' : 'death'}) }}">Death</a></li>
+                                <li><a href="{{ path('list_units_by_alliance_alone', {'alliance' : 'destruction'}) }}">Destruction</a></li>
+                                <li><a href="{{ path('list_units') }}">All</a></li>
                             </ul>
                         </li>
+                        {% if showFaction == true %}
+                            <li id="js-faction-dropdown-menu-li" class="dropdown">
+                                <a id="selectedCategory" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">Choose Faction <span class="caret"></span></a>
+                                <ul id="js-faction-dropdown" class="dropdown-menu">
+                                    <li><a href="#">test</a></li>
+                                    <li><a href="#">test 1</a></li>
+                                    <li><a href="#">test 2</a></li>
+                                    <li><a href="#">test 3</a></li>
+                                </ul>
+                            </li>
+                        {% endif %}
 
-                        <li id="js-faction-dropdown-menu-li" class="dropdown" style="display: none">
-                            <a id="selectedCategory" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false">Choose Faction <span class="caret"></span></a>
-                            <ul id="js-faction-dropdown" class="dropdown-menu">
-                                <li><a href="#">test</a></li>
-                                <li><a href="#">test 1</a></li>
-                                <li><a href="#">test 2</a></li>
-                                <li><a href="#">test 3</a></li>
-                            </ul>
-                        </li>
 
                     </ul>
                     <form class="navbar-form navbar-right">
@@ -154,16 +156,16 @@
             $(targetLink).parent().addClass('active');
             $(targetLink).parent().siblings().removeClass('active');
 
-            $(".dropdown-menu li a").click(function (e) {
-                $(this).parents(".dropdown").find('.dropdown-toggle').html($(this).text() + ' <span class="caret"></span>');
-                $(this).parents(".dropdown").find('.dropdown-toggle').val($(this).data('value'));
-
-                var category = $(this).text();
-
-                if($(this).parents('#js-alliance-dropdown').attr('id') && !($('#js-faction-dropdown-menu-li').is(':visible'))){
-                    $('#js-faction-dropdown-menu-li').show();
-                }
-            });
+//            $(".dropdown-menu li a").click(function (e) {
+//                $(this).parents(".dropdown").find('.dropdown-toggle').html($(this).text() + ' <span class="caret"></span>');
+//                $(this).parents(".dropdown").find('.dropdown-toggle').val($(this).data('value'));
+//
+//                var category = $(this).text();
+//
+//                if($(this).parents('#js-alliance-dropdown').attr('id') && !($('#js-faction-dropdown-menu-li').is(':visible'))){
+//                    $('#js-faction-dropdown-menu-li').show();
+//                }
+//            });
 
             $('#unit-stat-display-navbar li a').click(function (e) {
                 var id;

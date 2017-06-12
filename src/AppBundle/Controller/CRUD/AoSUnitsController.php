@@ -10,6 +10,7 @@ namespace AppBundle\Controller\CRUD;
 
 
 use AppBundle\Controller\AbstractCRUDController;
+use AppBundle\Entity\Alliance;
 use AppBundle\Entity\Unit;
 use AppBundle\Form\AddUnitForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -39,6 +40,33 @@ class AoSUnitsController extends AbstractCRUDController
             'entityName' => $this->entityName,
             'attributes' => $attributes,
             'showFaction' => $showFaction
+        ]);
+    }
+
+    /**
+     * @Route("/units/{alliance}", name="list_units_by_alliance_alone")
+     */
+    public function listByFactionAction($alliance){
+        $em = $this->getDoctrine()->getManager();
+
+        $units = $em->getRepository('AppBundle:Unit')
+            ->findBy([
+                'alliance' => $alliance
+            ]);
+
+        $attributes = $this->serialize($units[0]);
+        $unitsArray = array();
+        $showFaction = true;
+
+        $this->serializeUnits($units, $unitsArray, $attributes);
+
+        return $this->render('crud/units/list.html.twig', [
+            'entities' => $unitsArray,
+            'routes'   => $this->routes,
+            'entityName' => $this->entityName,
+            'attributes' => $attributes,
+            'showFaction' => $showFaction,
+            'alliance' => $alliance
         ]);
     }
 
