@@ -24,13 +24,19 @@
                         <li id="specialRuleSelector"><a href="#">Special Rules</a></li>
 
                         <li class="dropdown">
-                            <a id="selectedCategory" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false">Choose Alliance <span class="caret"></span></a>
+                            {% if showFaction == true %}
+                                <a id="selectedCategory" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">{{ alliance }} <span class="caret"></span></a>
+                            {% else %}
+                                <a id="selectedCategory" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">Choose Alliance <span class="caret"></span></a>
+                            {% endif %}
+
                             <ul id="js-alliance-dropdown" class="dropdown-menu js-non-selectable">
-                                <li><a href="{{ path('list_units_by_alliance_alone', {'alliance' : 'order'}) }}">Order</a></li>
-                                <li><a href="{{ path('list_units_by_alliance_alone', {'alliance' : 'chaos'}) }}">Chaos</a></li>
-                                <li><a href="{{ path('list_units_by_alliance_alone', {'alliance' : 'death'}) }}">Death</a></li>
-                                <li><a href="{{ path('list_units_by_alliance_alone', {'alliance' : 'destruction'}) }}">Destruction</a></li>
+                                <li><a href="{{ path('list_units_by_alliance_alone', {'alliance' : 'Order'}) }}">Order</a></li>
+                                <li><a href="{{ path('list_units_by_alliance_alone', {'alliance' : 'Chaos'}) }}">Chaos</a></li>
+                                <li><a href="{{ path('list_units_by_alliance_alone', {'alliance' : 'Death'}) }}">Death</a></li>
+                                <li><a href="{{ path('list_units_by_alliance_alone', {'alliance' : 'Destruction'}) }}">Destruction</a></li>
                                 <li><a href="{{ path('list_units') }}">All</a></li>
                             </ul>
                         </li>

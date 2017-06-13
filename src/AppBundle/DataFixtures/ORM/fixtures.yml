@@ -1,22 +1,218 @@
 AppBundle\Entity\Alliance:
-    alliance_1:
+    alliance_order:
         name: Order
-    alliance_2:
+    alliance_death:
         name: Death
-    alliance_3:
+    alliance_chaos:
         name: Chaos
-    alliance_4:
+    alliance_destruction:
         name: Destruction
 
 AppBundle\Entity\Faction:
-    factionentity_{1..10}:
-        name: Faction <current()>
+    faction_sc_eternals:
+        name: Stormcast Eternals
+        alliance: '@alliance_order'
+    faction_sylvaneth:
+        name: Sylvaneth
+        alliance: '@alliance_order'
+    faction_khar_overlords:
+        name: Kharadron Overlords
+        alliance: '@alliance_order'
+    faction_fyreslayers:
+        name: Fyreslayers
+        alliance: '@alliance_order'
+    faction_seraphon:
+        name: Seraphon
+        alliance: '@alliance_order'
+
+    faction_ever_chosen:
+        name: Ever Chosen
+        alliance: '@alliance_chaos'
+    faction_skaven_pestilens:
+        name: Skaven Pestilens
+        alliance: '@alliance_chaos'
+    faction_blades_of_khorne:
+        name: Blades of Khorne
+        alliance: '@alliance_chaos'
+    faction_disciples_of_tzeentch:
+        name: Disciples of Tzeentch
+        alliance: '@alliance_chaos'
+
+    faction_flesh_eater_courts:
+        name: Flesh-eater Courts
+        alliance: '@alliance_death'
+
+    faction_ironjawz:
+        name: Ironjawz
+        alliance: '@alliance_destruction'
+    faction_bonesplitterz:
+        name: Bonesplitterz
+        alliance: '@alliance_destruction'
+    faction_beastclaw_raiders:
+        name: Beastclaw Raiders
+        alliance: '@alliance_destruction'
 
 AppBundle\Entity\Unit:
-    aosunit_{1..10}:
+    aosunit_{1..3}:
         name: Unit <current()>
-        alliance: '@alliance_*'
-        faction: '@factionentity_*'
+        alliance: '@alliance_order'
+        faction: '@faction_sc_eternals'
+        minNumOfModels: <numberBetween(1, 15)>
+        maxNumOfModels: <numberBetween(15, 45)>
+        points: <numberBetween(50, 500)>
+        saveValue: <numberBetween(1, 6)>
+        braveryValue: <numberBetween(1, 6)>
+        numOfWounds: <numberBetween(1, 6)>
+        spellsPerRound: <numberBetween(1, 6)>
+        description: <paragraph()>
+
+    aosunit_{4..6}:
+        name: Unit <current()>
+        alliance: '@alliance_order'
+        faction: '@faction_sylvaneth'
+        minNumOfModels: <numberBetween(1, 15)>
+        maxNumOfModels: <numberBetween(15, 45)>
+        points: <numberBetween(50, 500)>
+        saveValue: <numberBetween(1, 6)>
+        braveryValue: <numberBetween(1, 6)>
+        numOfWounds: <numberBetween(1, 6)>
+        spellsPerRound: <numberBetween(1, 6)>
+        description: <paragraph()>
+
+    aosunit_{7..9}:
+        name: Unit <current()>
+        alliance: '@alliance_order'
+        faction: '@faction_khar_overlords'
+        minNumOfModels: <numberBetween(1, 15)>
+        maxNumOfModels: <numberBetween(15, 45)>
+        points: <numberBetween(50, 500)>
+        saveValue: <numberBetween(1, 6)>
+        braveryValue: <numberBetween(1, 6)>
+        numOfWounds: <numberBetween(1, 6)>
+        spellsPerRound: <numberBetween(1, 6)>
+        description: <paragraph()>
+
+    aosunit_{10..12}:
+        name: Unit <current()>
+        alliance: '@alliance_death'
+        faction: '@faction_fyreslayers'
+        minNumOfModels: <numberBetween(1, 15)>
+        maxNumOfModels: <numberBetween(15, 45)>
+        points: <numberBetween(50, 500)>
+        saveValue: <numberBetween(1, 6)>
+        braveryValue: <numberBetween(1, 6)>
+        numOfWounds: <numberBetween(1, 6)>
+        spellsPerRound: <numberBetween(1, 6)>
+        description: <paragraph()>
+
+    aosunit_{13..15}:
+        name: Unit <current()>
+        alliance: '@alliance_order'
+        faction: '@faction_seraphon'
+        minNumOfModels: <numberBetween(1, 15)>
+        maxNumOfModels: <numberBetween(15, 45)>
+        points: <numberBetween(50, 500)>
+        saveValue: <numberBetween(1, 6)>
+        braveryValue: <numberBetween(1, 6)>
+        numOfWounds: <numberBetween(1, 6)>
+        spellsPerRound: <numberBetween(1, 6)>
+        description: <paragraph()>
+
+    aosunit_{16..18}:
+        name: Unit <current()>
+        alliance: '@alliance_order'
+        faction: '@faction_flesh_eater_courts'
+        minNumOfModels: <numberBetween(1, 15)>
+        maxNumOfModels: <numberBetween(15, 45)>
+        points: <numberBetween(50, 500)>
+        saveValue: <numberBetween(1, 6)>
+        braveryValue: <numberBetween(1, 6)>
+        numOfWounds: <numberBetween(1, 6)>
+        spellsPerRound: <numberBetween(1, 6)>
+        description: <paragraph()>
+
+    aosunit_{19..21}:
+        name: Unit <current()>
+        alliance: '@alliance_chaos'
+        faction: '@faction_ever_chosen'
+        minNumOfModels: <numberBetween(1, 15)>
+        maxNumOfModels: <numberBetween(15, 45)>
+        points: <numberBetween(50, 500)>
+        saveValue: <numberBetween(1, 6)>
+        braveryValue: <numberBetween(1, 6)>
+        numOfWounds: <numberBetween(1, 6)>
+        spellsPerRound: <numberBetween(1, 6)>
+        description: <paragraph()>
+
+    aosunit_{22..24}:
+        name: Unit <current()>
+        alliance: '@alliance_chaos'
+        faction: '@faction_skaven_pestilens'
+        minNumOfModels: <numberBetween(1, 15)>
+        maxNumOfModels: <numberBetween(15, 45)>
+        points: <numberBetween(50, 500)>
+        saveValue: <numberBetween(1, 6)>
+        braveryValue: <numberBetween(1, 6)>
+        numOfWounds: <numberBetween(1, 6)>
+        spellsPerRound: <numberBetween(1, 6)>
+        description: <paragraph()>
+
+    aosunit_{25..27}:
+        name: Unit <current()>
+        alliance: '@alliance_chaos'
+        faction: '@faction_blades_of_khorne'
+        minNumOfModels: <numberBetween(1, 15)>
+        maxNumOfModels: <numberBetween(15, 45)>
+        points: <numberBetween(50, 500)>
+        saveValue: <numberBetween(1, 6)>
+        braveryValue: <numberBetween(1, 6)>
+        numOfWounds: <numberBetween(1, 6)>
+        spellsPerRound: <numberBetween(1, 6)>
+        description: <paragraph()>
+
+    aosunit_{28..30}:
+        name: Unit <current()>
+        alliance: '@alliance_chaos'
+        faction: '@faction_disciples_of_tzeentch'
+        minNumOfModels: <numberBetween(1, 15)>
+        maxNumOfModels: <numberBetween(15, 45)>
+        points: <numberBetween(50, 500)>
+        saveValue: <numberBetween(1, 6)>
+        braveryValue: <numberBetween(1, 6)>
+        numOfWounds: <numberBetween(1, 6)>
+        spellsPerRound: <numberBetween(1, 6)>
+        description: <paragraph()>
+
+    aosunit_{31..33}:
+        name: Unit <current()>
+        alliance: '@alliance_destruction'
+        faction: '@faction_ironjawz'
+        minNumOfModels: <numberBetween(1, 15)>
+        maxNumOfModels: <numberBetween(15, 45)>
+        points: <numberBetween(50, 500)>
+        saveValue: <numberBetween(1, 6)>
+        braveryValue: <numberBetween(1, 6)>
+        numOfWounds: <numberBetween(1, 6)>
+        spellsPerRound: <numberBetween(1, 6)>
+        description: <paragraph()>
+
+    aosunit_{34..36}:
+        name: Unit <current()>
+        alliance: '@alliance_destruction'
+        faction: '@faction_bonesplitterz'
+        minNumOfModels: <numberBetween(1, 15)>
+        maxNumOfModels: <numberBetween(15, 45)>
+        points: <numberBetween(50, 500)>
+        saveValue: <numberBetween(1, 6)>
+        braveryValue: <numberBetween(1, 6)>
+        numOfWounds: <numberBetween(1, 6)>
+        spellsPerRound: <numberBetween(1, 6)>
+        description: <paragraph()>
+
+    aosunit_{37..39}:
+        name: Unit <current()>
+        alliance: '@alliance_destruction'
+        faction: '@faction_beastclaw_raiders'
         minNumOfModels: <numberBetween(1, 15)>
         maxNumOfModels: <numberBetween(15, 45)>
         points: <numberBetween(50, 500)>

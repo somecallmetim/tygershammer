@@ -54,9 +54,14 @@ class AoSUnitsController extends AbstractCRUDController
                 'alliance' => $alliance
             ]);
 
+        $allianceEntity = $em->getRepository('AppBundle:Alliance')
+            ->findBy([
+               'name' => $alliance
+            ]);
+
         $factions = $em->getRepository('AppBundle:Faction')
             ->findBy([
-                'alliance' => $alliance
+                'alliance' => $allianceEntity
             ]);
 
         $attributes = $this->serialize($units[0]);

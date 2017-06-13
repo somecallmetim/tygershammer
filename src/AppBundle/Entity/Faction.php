@@ -41,6 +41,7 @@ class Faction
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Alliance", inversedBy="factions")
+     * @Assert\NotBlank()
      */
     private $alliance;
 
