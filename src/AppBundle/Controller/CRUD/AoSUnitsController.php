@@ -31,6 +31,7 @@ class AoSUnitsController extends AbstractCRUDController
         $attributes = $this->serialize($units[0]);
         $unitsArray = array();
         $showFaction = false;
+        $factionChosen = false;
 
         $this->serializeUnits($units, $unitsArray, $attributes);
 
@@ -39,14 +40,15 @@ class AoSUnitsController extends AbstractCRUDController
             'routes'   => $this->routes,
             'entityName' => $this->entityName,
             'attributes' => $attributes,
-            'showFaction' => $showFaction
+            'showFaction' => $showFaction,
+            'factionChosen' =>$factionChosen
         ]);
     }
 
     /**
      * @Route("/units/{alliance}", name="list_units_by_alliance_alone")
      */
-    public function listByFactionAction($alliance){
+    public function listByAllianceAction($alliance){
         $em = $this->getDoctrine()->getManager();
 
         $units = $em->getRepository('AppBundle:Unit')
@@ -67,6 +69,7 @@ class AoSUnitsController extends AbstractCRUDController
         $attributes = $this->serialize($units[0]);
         $unitsArray = array();
         $showFaction = true;
+        $factionChosen = false;
 
         $this->serializeUnits($units, $unitsArray, $attributes);
 
@@ -76,7 +79,54 @@ class AoSUnitsController extends AbstractCRUDController
             'entityName' => $this->entityName,
             'attributes' => $attributes,
             'showFaction' => $showFaction,
+            'factionChosen' => $factionChosen,
             'alliance' => $alliance,
+            'factions' => $factions
+        ]);
+    }
+
+    /**
+     * @Route("/units/{alliance}/{faction}", name="list_units_by_faction_and_alliance")
+     */
+    public function listByFactionAction($alliance, $faction){
+        $em = $this->getDoctrine()->getManager();
+
+        $factionEntity = $em->getRepository('AppBundle:Faction')
+            ->findBy([
+                'name' => $faction
+            ]);
+
+        $units = $em->getRepository('AppBundle:Unit')
+            ->findBy([
+                'faction' => $factionEntity
+            ]);
+
+        $allianceEntity = $em->getRepository('AppBundle:Alliance')
+            ->findBy([
+                'name' => $alliance
+            ]);
+
+        $factions = $em->getRepository('AppBundle:Faction')
+            ->findBy([
+                'alliance' => $allianceEntity
+            ]);
+
+        $attributes = $this->serialize($units[0]);
+        $unitsArray = array();
+        $showFaction = true;
+        $factionChosen = true;
+
+        $this->serializeUnits($units, $unitsArray, $attributes);
+
+        return $this->render('crud/units/list.html.twig', [
+            'entities' => $unitsArray,
+            'routes'   => $this->routes,
+            'entityName' => $this->entityName,
+            'attributes' => $attributes,
+            'showFaction' => $showFaction,
+            'factionChosen' => $factionChosen,
+            'alliance' => $alliance,
+            'currentFaction' => $faction,
             'factions' => $factions
         ]);
     }

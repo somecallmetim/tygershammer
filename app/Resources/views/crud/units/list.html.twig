@@ -42,12 +42,23 @@
                         </li>
                         {% if showFaction == true %}
                             <li id="js-faction-dropdown-menu-li" class="dropdown">
-                                <a id="selectedCategory" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                   aria-haspopup="true" aria-expanded="false">Choose Faction <span class="caret"></span></a>
+                                {% if factionChosen == true %}
+                                    <a id="selectedCategory" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                       aria-haspopup="true" aria-expanded="false"> {{ currentFaction }} <span class="caret"></span></a>
+                                {% else %}
+                                    <a id="selectedCategory" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                       aria-haspopup="true" aria-expanded="false">Choose Faction <span class="caret"></span></a>
+                                {% endif %}
+
                                 <ul id="js-faction-dropdown" class="dropdown-menu">
                                     {% for faction in factions %}
-                                        <li><a href="#"> {{ faction.name }} </a></li>
+                                        <li><a href="{{ path(
+                                            'list_units_by_faction_and_alliance',
+                                            {'alliance' : alliance,
+                                                'faction' : faction.name }
+                                            ) }}"> {{ faction.name }} </a></li>
                                     {% endfor %}
+                                    <li><a href="{{ path('list_units_by_alliance_alone', {'alliance' : alliance}) }}">All</a> </li>
                                 </ul>
                             </li>
                         {% endif %}

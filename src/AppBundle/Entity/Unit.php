@@ -40,22 +40,6 @@ class Unit
     protected $alliance;
 
     /**
-     * @return mixed
-     */
-    public function getAlliance()
-    {
-        return $this->alliance;
-    }
-
-    /**
-     * @param mixed $alliance
-     */
-    public function setAlliance($alliance)
-    {
-        $this->alliance = $alliance;
-    }
-
-    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Faction", inversedBy="units")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -109,6 +93,22 @@ class Unit
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAlliance()
+    {
+        return $this->alliance;
+    }
+
+    /**
+     * @param mixed $alliance
+     */
+    public function setAlliance($alliance)
+    {
+        $this->alliance = $alliance;
     }
 
     public function getFaction()
