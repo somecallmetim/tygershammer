@@ -13,6 +13,7 @@ use AppBundle\Controller\AbstractCRUDController;
 use AppBundle\Entity\Alliance;
 use AppBundle\Entity\Unit;
 use AppBundle\Form\AddUnitForm;
+use function PHPSTORM_META\type;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,6 +44,61 @@ class AoSUnitsController extends AbstractCRUDController
             'showFaction' => $showFaction,
             'factionChosen' =>$factionChosen
         ]);
+    }
+
+    /**
+     * @Route("/units/search_results/{searchTerms}", options={"expose"=true},name="listSearchResults")
+     */
+    public function listSearchResultsAction($searchTerms){
+        $em = $this->getDoctrine()->getManager();
+
+        $units = $em->getRepository('AppBundle:Unit')->findBySearchTerm((string)$searchTerms);
+
+
+//        $units = $em->getRepository('AppBundle:Unit')
+//            ->findOneBy([
+//                'name' => 'Unit 1'
+//            ]);
+
+        if(!empty($units)){
+            $attributes = $this->serialize($units[0]);
+            $unitsArray = array();
+            $showFaction = false;
+            $factionChosen = false;
+
+            $this->serializeUnits($units, $unitsArray, $attributes);
+
+            return $this->render('crud/units/list.html.twig', [
+                'entities' => $unitsArray,
+                'routes'   => $this->routes,
+                'entityName' => $this->entityName,
+                'attributes' => $attributes,
+                'showFaction' => $showFaction,
+                'factionChosen' =>$factionChosen
+            ]);
+        }else {
+            $this->addFlash('danger', sprintf('No results found. :('));
+            $units = $em->getRepository('AppBundle:Unit')
+                ->findAll();
+
+            $attributes = $this->serialize($units[0]);
+            $unitsArray = array();
+            $showFaction = false;
+            $factionChosen = false;
+
+            $this->serializeUnits($units, $unitsArray, $attributes);
+
+            return $this->render('crud/units/list.html.twig', [
+                'entities' => $unitsArray,
+                'routes'   => $this->routes,
+                'entityName' => $this->entityName,
+                'attributes' => $attributes,
+                'showFaction' => $showFaction,
+                'factionChosen' =>$factionChosen
+            ]);
+        }
+
+
     }
 
     /**

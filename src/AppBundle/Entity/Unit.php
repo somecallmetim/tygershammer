@@ -14,7 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use AppBundle\Entity\Faction;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UnitRepository")
  * @ORM\Table(name="unit")
  * @UniqueEntity(fields={"name"}, message="This Unit already exists")
  */
