@@ -16,8 +16,9 @@ class UnitRepository extends EntityRepository
     public function findBySearchTerm($searchTerm){
         $searchTerm = '%' . $searchTerm . '%';
         return $this->createQueryBuilder('aos_unit')
-            ->andWhere('aos_unit.name LIKE :name')
-            ->setParameter('name', $searchTerm)
+            ->Where('aos_unit.name LIKE :searchTerm 
+                    OR aos_unit.description LIKE :searchTerm')
+            ->setParameter('searchTerm', $searchTerm)
             ->getQuery()
             ->execute()
         ;
