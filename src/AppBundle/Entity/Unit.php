@@ -35,7 +35,7 @@ class Unit
     protected $name;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Alliance", inversedBy="units")
      */
     protected $alliance;
 

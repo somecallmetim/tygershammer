@@ -301,7 +301,9 @@ class AoSUnitsController extends AbstractCRUDController
         $serializer = $this->get('app.entity_serializer');
         $attributes = $serializer->buildAttributeArray($unit);
         $faction = $attributes['faction'];
+        $alliance = $attributes['alliance'];
         $attributes['faction'] = $faction['name'];
+        $attributes['alliance'] = $alliance['name'];
         return $attributes;
     }
 }
