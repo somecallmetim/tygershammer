@@ -55,11 +55,6 @@ class AoSUnitsController extends AbstractCRUDController
         $units = $em->getRepository('AppBundle:Unit')->findBySearchTerm((string)$searchTerms);
 
 
-//        $units = $em->getRepository('AppBundle:Unit')
-//            ->findOneBy([
-//                'name' => 'Unit 1'
-//            ]);
-
         if(!empty($units)){
             $attributes = $this->serialize($units[0]);
             $unitsArray = array();
@@ -107,10 +102,7 @@ class AoSUnitsController extends AbstractCRUDController
     public function listByAllianceAction($alliance){
         $em = $this->getDoctrine()->getManager();
 
-        $units = $em->getRepository('AppBundle:Unit')
-            ->findBy([
-                'alliance' => $alliance
-            ]);
+        $units = $em->getRepository('AppBundle:Unit')->findByAlliance($alliance);
 
         $allianceEntity = $em->getRepository('AppBundle:Alliance')
             ->findBy([

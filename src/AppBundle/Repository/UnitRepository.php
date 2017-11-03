@@ -27,4 +27,15 @@ class UnitRepository extends EntityRepository
             ->execute()
         ;
     }
+
+    public function findByAlliance($searchTerm){
+        $searchTerm = '%' . $searchTerm . '%';
+        return $this->createQueryBuilder('aos_unit')
+            ->join('aos_unit.alliance', 'alliance', 'WITH', 'aos_unit.alliance = alliance.id')
+            ->Where('alliance.name LIKE :searchTerm')
+            ->setParameter('searchTerm', $searchTerm)
+            ->getQuery()
+            ->execute()
+            ;
+    }
 }
