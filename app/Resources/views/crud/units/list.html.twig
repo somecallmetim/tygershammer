@@ -25,6 +25,7 @@
 
                         <li class="dropdown">
                             {% if showFaction == true %}
+                                <!--- if you're here, you're in the listByAllianceAction or listByFactionAction method --->
                                 <a id="selectedCategory" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-haspopup="true" aria-expanded="false">{{ alliance }} <span class="caret"></span></a>
                             {% else %}
@@ -41,6 +42,7 @@
                             </ul>
                         </li>
                         {% if showFaction == true %}
+                            <!--- if you're here, you're in the listByAllianceAction or listByFactionAction method --->
                             <li id="js-faction-dropdown-menu-li" class="dropdown">
                                 {% if factionChosen == true %}
                                     <a id="selectedCategory" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
