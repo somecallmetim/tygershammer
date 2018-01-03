@@ -70,6 +70,7 @@ class AoSUnitsController extends AbstractCRUDController
         // entry is another array that contains all that unit's data
         $units = $em->getRepository('AppBundle:Unit')->findBySearchTerm((string)$searchTerms);
 
+
         // when search yields results
         if(!empty($units)){
             $attributes = $this->serialize($units[0]);
@@ -132,10 +133,7 @@ class AoSUnitsController extends AbstractCRUDController
     public function listByAllianceAction($alliance){
         $em = $this->getDoctrine()->getManager();
 
-        $units = $em->getRepository('AppBundle:Unit')
-            ->findBy([
-                'alliance' => $alliance
-            ]);
+        $units = $em->getRepository('AppBundle:Unit')->findByAlliance($alliance);
 
         $allianceEntity = $em->getRepository('AppBundle:Alliance')
             ->findBy([
@@ -343,7 +341,9 @@ class AoSUnitsController extends AbstractCRUDController
         $serializer = $this->get('app.entity_serializer');
         $attributes = $serializer->buildAttributeArray($unit);
         $faction = $attributes['faction'];
+        $alliance = $attributes['alliance'];
         $attributes['faction'] = $faction['name'];
+        $attributes['alliance'] = $alliance['name'];
         return $attributes;
     }
 }

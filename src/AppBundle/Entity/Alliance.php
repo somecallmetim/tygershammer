@@ -38,6 +38,12 @@ class Alliance
      */
     private $factions;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Unit", mappedBy="alliance")
+     */
+    private $units;
+
+
     public function __construct()
     {
         $this->factions = new ArrayCollection();
@@ -93,6 +99,23 @@ class Alliance
     {
         $this->factions = $factions;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUnits()
+    {
+        return $this->units;
+    }
+
+    /**
+     * @param mixed $units
+     */
+    public function setUnits($units)
+    {
+        $this->units = $units;
+    }
+
 
     function __toString()
     {
