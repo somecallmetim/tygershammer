@@ -13,7 +13,7 @@ use AppBundle\Controller\AbstractCRUDController;
 use AppBundle\Entity\Alliance;
 use AppBundle\Entity\Unit;
 use AppBundle\Form\AddUnitForm;
-use function PHPSTORM_META\type;
+//use function PHPSTORM_META\type;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,10 +26,18 @@ class AoSUnitsController extends AbstractCRUDController
     public function listAction(Request $request){
         $em = $this->getDoctrine()->getManager();
 
+        //TODO can we get rid of either $units or $unitsArray and use just one in the twig template?
+
+        // $units eventually ends up being an associative array where the unit name is the key and the data in each
+        // entry is another array that contains all that unit's data
         $units = $em->getRepository('AppBundle:Unit')
             ->findAll();
 
+        // $attributes is an associative array that is only being used for it's keys, which are the data fields
+        // for the unit entity
         $attributes = $this->serialize($units[0]);
+
+        // $unitsArray eventually ends up being an array where each entry is the data of a given unit in the database.
         $unitsArray = array();
         $showFaction = false;
         $factionChosen = false;
@@ -37,11 +45,17 @@ class AoSUnitsController extends AbstractCRUDController
         $this->serializeUnits($units, $unitsArray, $attributes);
 
         return $this->render('crud/units/list.html.twig', [
+            // array
             'entities' => $unitsArray,
+            // array of routes the template needs
             'routes'   => $this->routes,
+            // string name for the entity this controller/twig template addresses
             'entityName' => $this->entityName,
+            // array that holds the attributes of the entity this controller/twig template addresses
             'attributes' => $attributes,
+            // boolean
             'showFaction' => $showFaction,
+            // boolean
             'factionChosen' =>$factionChosen
         ]);
     }
@@ -52,14 +66,11 @@ class AoSUnitsController extends AbstractCRUDController
     public function listSearchResultsAction($searchTerms){
         $em = $this->getDoctrine()->getManager();
 
+        // $units eventually ends up being an associative array where the unit name is the key and the data in each
+        // entry is another array that contains all that unit's data
         $units = $em->getRepository('AppBundle:Unit')->findBySearchTerm((string)$searchTerms);
 
-
-//        $units = $em->getRepository('AppBundle:Unit')
-//            ->findOneBy([
-//                'name' => 'Unit 1'
-//            ]);
-
+        // when search yields results
         if(!empty($units)){
             $attributes = $this->serialize($units[0]);
             $unitsArray = array();
@@ -69,13 +80,21 @@ class AoSUnitsController extends AbstractCRUDController
             $this->serializeUnits($units, $unitsArray, $attributes);
 
             return $this->render('crud/units/list.html.twig', [
+                // array
                 'entities' => $unitsArray,
+                // array of routes the template needs
                 'routes'   => $this->routes,
+                // string name for the entity this controller/twig template addresses
                 'entityName' => $this->entityName,
+                // array that holds the attributes of the entity this controller/twig template addresses
                 'attributes' => $attributes,
+                // boolean
                 'showFaction' => $showFaction,
+                // boolean
                 'factionChosen' =>$factionChosen
             ]);
+
+        // when search doesn't yield results
         }else {
             $this->addFlash('danger', sprintf('No results found. :('));
             $units = $em->getRepository('AppBundle:Unit')
@@ -89,11 +108,17 @@ class AoSUnitsController extends AbstractCRUDController
             $this->serializeUnits($units, $unitsArray, $attributes);
 
             return $this->render('crud/units/list.html.twig', [
+                // array
                 'entities' => $unitsArray,
+                // array of routes the template needs
                 'routes'   => $this->routes,
+                // string name for the entity this controller/twig template addresses
                 'entityName' => $this->entityName,
+                // array that holds the attributes of the entity this controller/twig template addresses
                 'attributes' => $attributes,
+                // boolean
                 'showFaction' => $showFaction,
+                // boolean
                 'factionChosen' =>$factionChosen
             ]);
         }
@@ -130,13 +155,21 @@ class AoSUnitsController extends AbstractCRUDController
         $this->serializeUnits($units, $unitsArray, $attributes);
 
         return $this->render('crud/units/list.html.twig', [
+            // array
             'entities' => $unitsArray,
+            // array of routes the template needs
             'routes'   => $this->routes,
+            // string name for the entity this controller/twig template addresses
             'entityName' => $this->entityName,
+            // array that holds the attributes of the entity this controller/twig template addresses
             'attributes' => $attributes,
+            // boolean
             'showFaction' => $showFaction,
-            'factionChosen' => $factionChosen,
+            // boolean
+            'factionChosen' =>$factionChosen,
+            // string
             'alliance' => $alliance,
+            // string
             'factions' => $factions
         ]);
     }
@@ -175,14 +208,23 @@ class AoSUnitsController extends AbstractCRUDController
         $this->serializeUnits($units, $unitsArray, $attributes);
 
         return $this->render('crud/units/list.html.twig', [
+            // array
             'entities' => $unitsArray,
+            // array of routes the template needs
             'routes'   => $this->routes,
+            // string name for the entity this controller/twig template addresses
             'entityName' => $this->entityName,
+            // array that holds the attributes of the entity this controller/twig template addresses
             'attributes' => $attributes,
+            // boolean
             'showFaction' => $showFaction,
-            'factionChosen' => $factionChosen,
+            // boolean
+            'factionChosen' =>$factionChosen,
+            // string
             'alliance' => $alliance,
+            // string
             'currentFaction' => $faction,
+            // array
             'factions' => $factions
         ]);
     }

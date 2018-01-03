@@ -21,3 +21,8 @@
 .idea/tygershammer.iml
 .idea/copyright/profiles_settings.xml
 .idea/modules.xml
+/web/.htaccessDefault
+/web/.htaccessDev
+web/.htaccessDefault
+web/.htaccessDev
+/web/.htaccess
