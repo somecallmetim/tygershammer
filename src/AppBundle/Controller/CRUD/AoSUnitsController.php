@@ -10,10 +10,8 @@ namespace AppBundle\Controller\CRUD;
 
 
 use AppBundle\Controller\AbstractCRUDController;
-use AppBundle\Entity\Alliance;
 use AppBundle\Entity\Unit;
 use AppBundle\Form\AddUnitForm;
-//use function PHPSTORM_META\type;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -232,6 +230,23 @@ class AoSUnitsController extends AbstractCRUDController
      */
     public function showAction(Unit $unit){
         $attributes = $this->serialize($unit);
+
+        $weaponsList = "";
+        $weaponsArray = $attributes['weapons'];
+        $numOfWeapons = count($weaponsArray);
+        $count = 0;
+
+        foreach($weaponsArray as $weapon){
+            if($count < $numOfWeapons){
+                $weaponsList = $weaponsList . $weapon . ", ";
+            }else {
+                $weaponsList = $weaponsList . $weapon;
+            }
+            $count = $count + 1;
+        }
+
+        $attributes['weapons'] = $weaponsList;
+
         return $this->render('crud/units/show.html.twig', [
             'entity' => $unit,
             'attributes' => $attributes,

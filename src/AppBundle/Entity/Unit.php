@@ -8,10 +8,10 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use AppBundle\Entity\Faction;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UnitRepository")
@@ -81,9 +81,19 @@ class Unit
     protected $spellsPerRound = 0;
 
     /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Weapon", inversedBy="units")
+     */
+    protected $weapons;
+
+    /**
      * @ORM\Column(type="text")
      */
     protected $description;
+
+    public function __construct()
+    {
+        $this->weapons = new ArrayCollection();
+    }
 
     public function getName()
     {

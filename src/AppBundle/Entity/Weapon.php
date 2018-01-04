@@ -8,6 +8,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -81,8 +82,19 @@ class Weapon
      * @ORM\Column(type="smallint", nullable=true)
      */
     private $staticDmg;
-    
-    
+
+    /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Unit", mappedBy="weapons")
+     */
+    private $units;
+
+
+    public function __construct()
+    {
+        $this->units = new ArrayCollection();
+    }
+
 
     /**
      * @return mixed
