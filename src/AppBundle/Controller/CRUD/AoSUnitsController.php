@@ -234,13 +234,13 @@ class AoSUnitsController extends AbstractCRUDController
         $weaponsList = "";
         $weaponsArray = $attributes['weapons'];
         $numOfWeapons = count($weaponsArray);
-        $count = 0;
+        $count = 1;
 
         foreach($weaponsArray as $weapon){
             if($count < $numOfWeapons){
-                $weaponsList = $weaponsList . $weapon . ", ";
+                $weaponsList = $weaponsList . $weapon['name'] . ", ";
             }else {
-                $weaponsList = $weaponsList . $weapon;
+                $weaponsList = $weaponsList . $weapon['name'];
             }
             $count = $count + 1;
         }

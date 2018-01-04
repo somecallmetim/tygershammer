@@ -64,6 +64,7 @@ AppBundle\Entity\Unit:
         braveryValue: <numberBetween(1, 6)>
         numOfWounds: <numberBetween(1, 6)>
         spellsPerRound: <numberBetween(1, 6)>
+        weapons: ['@weapon_*', '@weapon_*']
         description: <paragraph()>
 
     aosunit_{4..6}:
@@ -77,6 +78,7 @@ AppBundle\Entity\Unit:
         braveryValue: <numberBetween(1, 6)>
         numOfWounds: <numberBetween(1, 6)>
         spellsPerRound: <numberBetween(1, 6)>
+        weapons: ['@weapon_*', '@weapon_*']
         description: <paragraph()>
 
     aosunit_{7..9}:
@@ -90,6 +92,7 @@ AppBundle\Entity\Unit:
         braveryValue: <numberBetween(1, 6)>
         numOfWounds: <numberBetween(1, 6)>
         spellsPerRound: <numberBetween(1, 6)>
+        weapons: ['@weapon_*', '@weapon_*']
         description: <paragraph()>
 
     aosunit_{10..12}:
@@ -103,6 +106,7 @@ AppBundle\Entity\Unit:
         braveryValue: <numberBetween(1, 6)>
         numOfWounds: <numberBetween(1, 6)>
         spellsPerRound: <numberBetween(1, 6)>
+        weapons: ['@weapon_*', '@weapon_*']
         description: <paragraph()>
 
     aosunit_{13..15}:
@@ -116,6 +120,7 @@ AppBundle\Entity\Unit:
         braveryValue: <numberBetween(1, 6)>
         numOfWounds: <numberBetween(1, 6)>
         spellsPerRound: <numberBetween(1, 6)>
+        weapons: ['@weapon_*', '@weapon_*']
         description: <paragraph()>
 
     aosunit_{16..18}:
@@ -129,6 +134,7 @@ AppBundle\Entity\Unit:
         braveryValue: <numberBetween(1, 6)>
         numOfWounds: <numberBetween(1, 6)>
         spellsPerRound: <numberBetween(1, 6)>
+        weapons: ['@weapon_*', '@weapon_*']
         description: <paragraph()>
 
     aosunit_{19..21}:
@@ -142,6 +148,7 @@ AppBundle\Entity\Unit:
         braveryValue: <numberBetween(1, 6)>
         numOfWounds: <numberBetween(1, 6)>
         spellsPerRound: <numberBetween(1, 6)>
+        weapons: ['@weapon_*', '@weapon_*']
         description: <paragraph()>
 
     aosunit_{22..24}:
@@ -155,6 +162,7 @@ AppBundle\Entity\Unit:
         braveryValue: <numberBetween(1, 6)>
         numOfWounds: <numberBetween(1, 6)>
         spellsPerRound: <numberBetween(1, 6)>
+        weapons: ['@weapon_*', '@weapon_*']
         description: <paragraph()>
 
     aosunit_{25..27}:
@@ -168,6 +176,7 @@ AppBundle\Entity\Unit:
         braveryValue: <numberBetween(1, 6)>
         numOfWounds: <numberBetween(1, 6)>
         spellsPerRound: <numberBetween(1, 6)>
+        weapons: ['@weapon_*', '@weapon_*']
         description: <paragraph()>
 
     aosunit_{28..30}:
@@ -181,6 +190,7 @@ AppBundle\Entity\Unit:
         braveryValue: <numberBetween(1, 6)>
         numOfWounds: <numberBetween(1, 6)>
         spellsPerRound: <numberBetween(1, 6)>
+        weapons: ['@weapon_*', '@weapon_*']
         description: <paragraph()>
 
     aosunit_{31..33}:
@@ -194,6 +204,7 @@ AppBundle\Entity\Unit:
         braveryValue: <numberBetween(1, 6)>
         numOfWounds: <numberBetween(1, 6)>
         spellsPerRound: <numberBetween(1, 6)>
+        weapons: ['@weapon_*', '@weapon_*']
         description: <paragraph()>
 
     aosunit_{34..36}:
@@ -207,6 +218,7 @@ AppBundle\Entity\Unit:
         braveryValue: <numberBetween(1, 6)>
         numOfWounds: <numberBetween(1, 6)>
         spellsPerRound: <numberBetween(1, 6)>
+        weapons: ['@weapon_*', '@weapon_*']
         description: <paragraph()>
 
     aosunit_{37..39}:
@@ -220,6 +232,7 @@ AppBundle\Entity\Unit:
         braveryValue: <numberBetween(1, 6)>
         numOfWounds: <numberBetween(1, 6)>
         spellsPerRound: <numberBetween(1, 6)>
+        weapons: ['@weapon_*', '@weapon_*']
         description: <paragraph()>
 
 AppBundle\Entity\Weapon:
