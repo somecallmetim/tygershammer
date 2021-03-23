@@ -27,10 +27,12 @@ security:
             security: false
 
         main:
+            logout_on_user_change: true
             anonymous: ~
             guard:
                 authenticators:
                     - app.security.login_form_authenticator
+                provider: username_users
 
             logout:
                 path: /logout
