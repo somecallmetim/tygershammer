@@ -84,6 +84,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     // phpunit-bridge had me add this function for compatibility with newer symfony frameworks.
     // this function is called on every request to see if this authenticator is needed
+    // in previous versions, getCredentials was called on every request. now this is called instead,
+    // and getCredentials is only called when supports returns true
     public function supports(Request $request)
     {
         return $request->headers->has('X-AUTH-TOKEN');
