@@ -13,8 +13,7 @@ use AppBundle\Controller\AbstractCRUDController;
 
 use AppBundle\Entity\UnitAbility;
 use AppBundle\Form\AddUnitAbilityForm;
-
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 

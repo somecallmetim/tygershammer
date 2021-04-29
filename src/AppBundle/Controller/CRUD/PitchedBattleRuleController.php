@@ -11,7 +11,7 @@ namespace AppBundle\Controller\CRUD;
 
 use AppBundle\Controller\AbstractCRUDController;
 use AppBundle\Form\AddPitchedBattleRuleForm;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\PitchedBattleRule;
 use Symfony\Component\HttpFoundation\Request;

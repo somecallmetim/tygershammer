@@ -14,7 +14,7 @@ use AppBundle\Entity\AbstractCRUDEntity;
 use AppBundle\Entity\Weapon;
 use AppBundle\Form\AddWeaponForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;

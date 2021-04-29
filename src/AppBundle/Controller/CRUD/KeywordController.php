@@ -12,7 +12,7 @@ namespace AppBundle\Controller\CRUD;
 use AppBundle\Controller\AbstractCRUDController;
 use AppBundle\Entity\Keyword;
 use AppBundle\Form\AddKeywordForm;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 

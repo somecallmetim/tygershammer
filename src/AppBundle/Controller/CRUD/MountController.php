@@ -12,7 +12,7 @@ namespace AppBundle\Controller\CRUD;
 use AppBundle\Controller\AbstractCRUDController;
 use AppBundle\Entity\Mount;
 use AppBundle\Form\AddMountForm;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 

@@ -14,7 +14,7 @@ use AppBundle\Entity\Alliance;
 use AppBundle\Entity\Unit;
 use AppBundle\Form\AddUnitForm;
 //use function PHPSTORM_META\type;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 

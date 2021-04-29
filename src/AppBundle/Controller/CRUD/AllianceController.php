@@ -12,7 +12,7 @@ namespace AppBundle\Controller\CRUD;
 use AppBundle\Controller\AbstractCRUDController;
 use AppBundle\Entity\Alliance;
 use AppBundle\Form\AddAllianceForm;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 
