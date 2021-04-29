@@ -29,7 +29,7 @@ class UserController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        if($form->isValid() && $form->isSubmitted()){
+        if($form->isSubmitted() && $form->isValid()){
             /**@var User $user */
             $user = $form->getData();
 
