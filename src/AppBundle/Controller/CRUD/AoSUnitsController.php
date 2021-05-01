@@ -13,7 +13,6 @@ use AppBundle\Controller\AbstractCRUDController;
 use AppBundle\Entity\Alliance;
 use AppBundle\Entity\Unit;
 use AppBundle\Form\AddUnitForm;
-//use function PHPSTORM_META\type;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,30 +25,24 @@ class AoSUnitsController extends AbstractCRUDController
     public function listAction(Request $request){
         $em = $this->getDoctrine()->getManager();
 
-        //TODO can we get rid of either $units or $unitsArray and use just one in the twig template?
-
-        // $units eventually ends up being an associative array where the unit name is the key and the data in each
-        // entry is another array that contains all that unit's data
+        // gives us an array of 'unit' entity objects
         $units = $em->getRepository('AppBundle:Unit')
             ->findAll();
 
-        // $attributes is an associative array that is only being used for it's keys, which are the data fields
-        // for the unit entity
-        $attributes = $this->serialize($units[0]);
+        // this extracts the field names from unit entity object
+        $attributes = $units[0]->getAllDataAsAssociativeArray();
+        $attributes = array_keys($attributes);
 
-        // $unitsArray eventually ends up being an array where each entry is the data of a given unit in the database.
-        $unitsArray = array();
+        // tells template what dropdown menus it needs to display
         $showFaction = false;
         $factionChosen = false;
 
-        $this->serializeUnits($units, $unitsArray, $attributes);
-
         return $this->render('crud/units/list.html.twig', [
-            // array
-            'entities' => $unitsArray,
+            // this is the array that contains all our actual units for our table
+            'entities' => $units,
             // array of routes the template needs
             'routes'   => $this->routes,
-            // string name for the entity this controller/twig template addresses
+            // used to dynamically name buttons/elements in twig templates
             'entityName' => $this->entityName,
             // array that holds the attributes of the entity this controller/twig template addresses
             'attributes' => $attributes,
@@ -66,26 +59,27 @@ class AoSUnitsController extends AbstractCRUDController
     public function listSearchResultsAction($searchTerms){
         $em = $this->getDoctrine()->getManager();
 
-        // $units eventually ends up being an associative array where the unit name is the key and the data in each
-        // entry is another array that contains all that unit's data
+        // gives us an array of 'unit' entity objects
         $units = $em->getRepository('AppBundle:Unit')->findBySearchTerm((string)$searchTerms);
 
 
-        // when search yields results
+        // when search yields non-zero results
         if(!empty($units)){
-            $attributes = $this->serialize($units[0]);
-            $unitsArray = array();
+            // this extracts the field names from unit entity
+            $attributes = $units[0]->getAllDataAsAssociativeArray();
+            $attributes = array_keys($attributes);
+
+            // tells template what dropdown menus it needs to display
             $showFaction = false;
             $factionChosen = false;
 
-            $this->serializeUnits($units, $unitsArray, $attributes);
 
             return $this->render('crud/units/list.html.twig', [
-                // array
-                'entities' => $unitsArray,
+                // this is the array that contains all our actual units for our table
+                'entities' => $units,
                 // array of routes the template needs
                 'routes'   => $this->routes,
-                // string name for the entity this controller/twig template addresses
+                // used to dynamically name buttons/elements in twig templates
                 'entityName' => $this->entityName,
                 // array that holds the attributes of the entity this controller/twig template addresses
                 'attributes' => $attributes,
@@ -98,22 +92,26 @@ class AoSUnitsController extends AbstractCRUDController
         // when search doesn't yield results
         }else {
             $this->addFlash('danger', sprintf('No results found. :('));
+
+            // gives us an array of 'unit' entity objects
             $units = $em->getRepository('AppBundle:Unit')
                 ->findAll();
 
-            $attributes = $this->serialize($units[0]);
-            $unitsArray = array();
+            // this extracts the field names from unit entity
+            $attributes = $units[0]->getAllDataAsAssociativeArray();
+            $attributes = array_keys($attributes);
+
+            // tells template what dropdown menus it needs to display
             $showFaction = false;
             $factionChosen = false;
 
-            $this->serializeUnits($units, $unitsArray, $attributes);
 
             return $this->render('crud/units/list.html.twig', [
-                // array
-                'entities' => $unitsArray,
+                // this is the array that contains all our actual units for our table
+                'entities' => $units,
                 // array of routes the template needs
                 'routes'   => $this->routes,
-                // string name for the entity this controller/twig template addresses
+                // used to dynamically name buttons/elements in twig templates
                 'entityName' => $this->entityName,
                 // array that holds the attributes of the entity this controller/twig template addresses
                 'attributes' => $attributes,
@@ -133,31 +131,36 @@ class AoSUnitsController extends AbstractCRUDController
     public function listByAllianceAction($alliance){
         $em = $this->getDoctrine()->getManager();
 
+        // gives us an array of 'unit' entity objects
         $units = $em->getRepository('AppBundle:Unit')->findByAlliance($alliance);
 
+        // gives us singular 'alliance' entity object
         $allianceEntity = $em->getRepository('AppBundle:Alliance')
             ->findBy([
                'name' => $alliance
             ]);
 
+        // gives us an array of 'faction' entity objects
         $factions = $em->getRepository('AppBundle:Faction')
             ->findBy([
                 'alliance' => $allianceEntity
             ]);
 
-        $attributes = $this->serialize($units[0]);
-        $unitsArray = array();
+        // this extracts the field names from unit entity
+        $attributes = $units[0]->getAllDataAsAssociativeArray();
+        $attributes = array_keys($attributes);
+
+        // tells template what dropdown menus it needs to display
         $showFaction = true;
         $factionChosen = false;
 
-        $this->serializeUnits($units, $unitsArray, $attributes);
 
         return $this->render('crud/units/list.html.twig', [
-            // array
-            'entities' => $unitsArray,
+            // this is the array that contains all our actual units for our table
+            'entities' => $units,
             // array of routes the template needs
             'routes'   => $this->routes,
-            // string name for the entity this controller/twig template addresses
+            // used to dynamically name buttons/elements in twig templates
             'entityName' => $this->entityName,
             // array that holds the attributes of the entity this controller/twig template addresses
             'attributes' => $attributes,
@@ -178,39 +181,45 @@ class AoSUnitsController extends AbstractCRUDController
     public function listByFactionAction($alliance, $faction){
         $em = $this->getDoctrine()->getManager();
 
+        // gives us a singular 'faction' entity object
         $factionEntity = $em->getRepository('AppBundle:Faction')
             ->findBy([
                 'name' => $faction
             ]);
 
+        // gives us an array of 'unit' entity objects
         $units = $em->getRepository('AppBundle:Unit')
             ->findBy([
                 'faction' => $factionEntity
             ]);
 
+        // gives us a singular 'alliance' entity object
         $allianceEntity = $em->getRepository('AppBundle:Alliance')
             ->findBy([
                 'name' => $alliance
             ]);
 
+        // gives us an array of 'faction' entity objects
         $factions = $em->getRepository('AppBundle:Faction')
             ->findBy([
                 'alliance' => $allianceEntity
             ]);
 
-        $attributes = $this->serialize($units[0]);
-        $unitsArray = array();
+        // this extracts the field names from unit entity
+        $attributes = $units[0]->getAllDataAsAssociativeArray();
+        $attributes = array_keys($attributes);
+
+        // tells template what dropdown menus it needs to display
         $showFaction = true;
         $factionChosen = true;
 
-        $this->serializeUnits($units, $unitsArray, $attributes);
 
         return $this->render('crud/units/list.html.twig', [
-            // array
-            'entities' => $unitsArray,
+            // this is the array that contains all our actual units for our table
+            'entities' => $units,
             // array of routes the template needs
             'routes'   => $this->routes,
-            // string name for the entity this controller/twig template addresses
+            // used to dynamically name buttons/elements in twig templates
             'entityName' => $this->entityName,
             // array that holds the attributes of the entity this controller/twig template addresses
             'attributes' => $attributes,
@@ -231,7 +240,11 @@ class AoSUnitsController extends AbstractCRUDController
      * @Route("crud/units/{name}", name="show_unit")
      */
     public function showAction(Unit $unit){
-        $attributes = $this->serialize($unit);
+
+        // this extracts the field names from unit entity
+        $attributes = $unit->getAllDataAsAssociativeArray();
+        $attributes = array_keys($attributes);
+
         return $this->render('crud/units/show.html.twig', [
             'entity' => $unit,
             'attributes' => $attributes,
@@ -328,22 +341,4 @@ class AoSUnitsController extends AbstractCRUDController
         $this->entityName = 'Unit';
     }
 
-    private function serializeUnits(&$units, &$unitsArray, &$attributes){
-        unset($attributes['id']);
-        unset($attributes['description']);
-
-        foreach($units as $unit){
-            $unitsArray[] = $this->serialize($unit);
-        }
-    }
-
-    function serialize(Unit $unit){
-        $serializer = $this->get('app.entity_serializer');
-        $attributes = $serializer->buildAttributeArray($unit);
-        $faction = $attributes['faction'];
-        $alliance = $attributes['alliance'];
-        $attributes['faction'] = $faction['name'];
-        $attributes['alliance'] = $alliance['name'];
-        return $attributes;
-    }
 }

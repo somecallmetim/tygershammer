@@ -85,6 +85,10 @@ class Unit
      */
     protected $description;
 
+    public function getAllDataAsAssociativeArray(){
+        return get_object_vars($this);
+    }
+
     public function getName()
     {
         return $this->name;
