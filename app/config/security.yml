@@ -32,6 +32,8 @@ security:
             guard:
                 authenticators:
                     - app.security.login_form_authenticator
+                provider:
+                    chain_provider
 
             logout:
                 path: security_logout
