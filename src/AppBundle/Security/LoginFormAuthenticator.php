@@ -37,66 +37,78 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         $this->security = $security;
     }
 
-    //gets called on every request to check to see is someone is attempting to log in
+    //gets called when $this->supports() determines request came from login page as a post request
     public function getCredentials(Request $request)
     {
-        $isLoginForm = $request->getPathInfo() == '/login' && $request->isMethod('POST');
 
-        if(!$isLoginForm){
-            return false;
-        }
-
+        // creates form object which takes data from the http request and turns it into a php object
         $form = $this->formFactory->create(LoginForm::class);
         $form->handleRequest($request);
-        $data = $form->getData();
 
+        // data (in this case username & password) from the http request
+            // note: in this context username can either be user's username or email address
+        $credentials = $form->getData();
+
+        // sets LAST_USERNAME to the username the user just submitted for easier login next time
         $request->getSession()->set(
             Security::LAST_USERNAME,
-            $data['_username']);
+            $credentials['_username']);
 
-        return $data;
+        // $credentials is passed to the getUser() function directly below as $credentials
+        return $credentials;
     }
 
     //SymfonyGuard calls this function directly after the above 'getCredentials' function
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        //$credentials == $data from the above 'getCredentials' function
+        //$credentials == $credentials from the above 'getCredentials' function
         $username = $credentials['_username'] ?: null;
 
+        // this if-else statement is what allows users to login using either their email or username
+            // the checkCredentials() function directly below is called next using $user
         if($user = $this->em->getRepository('AppBundle:User')->findOneBy(['username' => $username])){
             return $user;
         }else{
-            return $this->em->getRepository('AppBundle:User')->findOneBy(['email' => $username]);
+            $user = $this->em->getRepository('AppBundle:User')->findOneBy(['email' => $username]);
+            return $user;
         }
     }
 
     //SymfonyGuard calls this function directly after the above 'getUser' function
     public function checkCredentials($credentials, UserInterface $user)
     {
-        //$credentials == $data from 'getCredentials' function
+        //$credentials is the same $credentials returned from 'getCredentials' function
         $password = $credentials['_password'];
+        $passwordIsValid = $this->passwordEncoder->isPasswordValid($user, $password);
 
-        if($this->passwordEncoder->isPasswordValid($user, $password)){
+        // if password if valid, login. Otherwise system throws a invalid credentials message
+        if($passwordIsValid){
             return true;
         }
         return false;
     }
 
-    // phpunit-bridge had me add this function for compatibility with newer symfony frameworks.
     // this function is called on every request to see if this authenticator is needed
-    // in previous versions, getCredentials was called on every request. now this is called instead,
-    // and getCredentials is only called when supports returns true
+        // in previous versions, getCredentials was called on every request. now this is called instead,
+        // and getCredentials is only called when supports() returns true
     public function supports(Request $request)
     {
-        return $request->headers->has('X-AUTH-TOKEN');
+        // if http request is a post request from the 'security_login' route, getCredentials() is called
+        return 'security_login' === $request->attributes->get('_route') && $request->isMethod('POST');
     }
 
+    // tells the system where to accept login requests from
     protected function getLoginUrl()
     {
         return $this->router->generate('security_login');
     }
 
-    //SymfonyGuard only calls if user typed in the login url instead of being redirected from somewhere
+    //SymfonyGuard calls this function when another redirect path hasn't already been specified
+        // for example, you're not logged in and try to go to a page only admins are allowed to access.
+        // SymfonyGuard will automatically direct you to the login page and then automatically take you
+        // to the page you were attempting to access before upon successful login (assuming your account
+        // has the appropriate privileges).
+        // This function is called, for example, when you hit the login button and then successfully login.
     protected function getDefaultSuccessRedirectUrl()
     {
         return $this->router->generate('homepage');

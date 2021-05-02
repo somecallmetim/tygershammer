@@ -32,10 +32,10 @@ security:
             guard:
                 authenticators:
                     - app.security.login_form_authenticator
-                provider: username_users
 
             logout:
-                path: /logout
+                path: security_logout
+
             # activate different ways to authenticate
 
             # http_basic: ~
